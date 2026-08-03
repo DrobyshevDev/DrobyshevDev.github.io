@@ -1,0 +1,39 @@
+name: External links
+
+# Outbound links rot on someone else's schedule, so this runs weekly rather
+# than on every push, and opens an issue instead of failing a pull request.
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  lychee:
+    name: Check outbound links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-retries 3
+            --timeout 20
+            --accept 200,206,403,429
+            index.html ru/index.html 404.html README.md
+          fail: false
+
+      - name: Open an issue when something is broken
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Broken outbound links on the site
+          content-filepath: ./lychee/out.md
+          labels: maintenance

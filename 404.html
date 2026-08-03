@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — DrobyshevDev</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script>
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img class="mark" src="/assets/mark.svg" alt="" width="26" height="26">
+      DrobyshevDev
+    </a>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="/#projects">Projects</a>
+      <a class="ext" href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="notfound">
+  <p class="code">HTTP 404</p>
+  <h1>This page does not exist</h1>
+  <p class="lead" style="margin-inline:auto">
+    The link may be out of date, or the page moved. Страница не найдена — возможно, ссылка устарела.
+  </p>
+  <p style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+    <a class="btn btn-primary" href="/">Go to the home page</a>
+    <a class="btn btn-secondary" href="https://github.com/DrobyshevDev" rel="noopener">Browse the organisation</a>
+  </p>
+</main>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

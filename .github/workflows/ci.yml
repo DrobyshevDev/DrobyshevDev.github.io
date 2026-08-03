@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site:
+    name: Site checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Structure, metadata, internal links, and the guarantee that the site
+      # makes no third-party requests. Standard library only, so no install step.
+      - name: Check the site
+        run: python scripts/check_site.py .
+
+      - name: Check the sitemap is well-formed
+        run: python -c "import xml.dom.minidom, sys; xml.dom.minidom.parse('sitemap.xml'); print('sitemap.xml parses')"
