@@ -27,7 +27,11 @@ VOID_ELEMENTS = {
 # start tag, and its children are irrelevant to document structure.
 SKIP_SUBTREES = {"svg"}
 
-PAGES = ["index.html", "ru/index.html", "404.html"]
+PAGES = ["index.html", "ru/index.html", "legal/index.html", "404.html"]
+# Pages that must carry full indexing metadata. The legal page is Russian-only
+# by design -- a translated legal text is a second legal text that can diverge
+# from the first -- so it is checked for structure and links but not for the
+# hreflang pair.
 INDEXED_PAGES = ["index.html", "ru/index.html"]
 
 

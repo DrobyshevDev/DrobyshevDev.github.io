@@ -736,6 +736,47 @@ section { scroll-margin-top: 76px; }
 }
 .contact-list dd { margin: 0; font-size: .94rem; color: var(--text-muted); text-wrap: pretty; }
 
+/* --- Legal pages ---------------------------------------------------------- */
+
+/* A legal document is read in one pass and referenced by clause number, so it
+   gets a narrower measure and clearly separated sections rather than cards. */
+.legal {
+  padding-top: 36px;
+  margin-top: 36px;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 76px;
+}
+.legal:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+
+.legal h2 { margin-bottom: 22px; }
+.legal h3 {
+  margin: 30px 0 10px;
+  font-size: 1rem;
+  color: var(--text);
+}
+.legal p {
+  color: var(--text-muted);
+  font-size: .94rem;
+  line-height: 1.7;
+  max-width: 68ch;
+  margin-bottom: 12px;
+  text-wrap: pretty;
+}
+.legal strong { color: var(--text); font-weight: 600; }
+.legal code {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 1px 5px;
+  font-size: .85em;
+  color: var(--text);
+  word-break: break-word;
+}
+
+/* The section index at the top of the document. */
+a.chip { transition: border-color .15s, color .15s; }
+a.chip:hover { text-decoration: none; border-color: var(--accent); color: var(--accent-text); }
+
 /* --- Footer --------------------------------------------------------------- */
 
 .site-footer {
