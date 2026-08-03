@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DrobyshevDev — фреймворки и инструменты для ML, LLM-агентов и операционных решений</title>
-<meta name="description" content="DrobyshevDev разрабатывает открытые фреймворки и инструменты для машинного обучения, LLM-агентов и систем принятия операционных решений: praxis, mlango и decisionrl. Типизировано, проверяется в CI на Linux, macOS и Windows.">
+<meta name="description" content="DrobyshevDev разрабатывает открытые фреймворки и инструменты для машинного обучения, LLM-агентов и систем принятия операционных решений: praxis, mlango, glia и decisionrl. Типизировано, проверяется в CI на Linux, macOS и Windows.">
 <link rel="canonical" href="https://drobyshevdev.github.io/ru/">
 <link rel="alternate" hreflang="en" href="https://drobyshevdev.github.io/">
 <link rel="alternate" hreflang="ru" href="https://drobyshevdev.github.io/ru/">
@@ -110,7 +110,7 @@
           <p class="hero-meta">
             <span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-              Три поддерживаемых проекта
+              Четыре поддерживаемых проекта
             </span>
             <span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="m8 10 2 2-2 2M13 14h3"/></svg>
@@ -128,7 +128,8 @@
           <div class="terminal-body">
             <div class="c"># фреймворк для ML, аналитики и LLM-агентов</div>
             <div><span class="p">$ </span>pip install <span class="s">"mlango[sklearn]"</span></div>
-            <div><span class="p">$ </span>mlango startproject myproject</div>
+            <div class="c"># минимальный читаемый агентный цикл</div>
+            <div><span class="p">$ </span>pip install glia-agents</div>
             <div class="c"># RL для операционных решений</div>
             <div><span class="p">$ </span>pip install decisionrl</div>
             <div class="c"># юридический ассистент — без ключей к API</div>
@@ -143,7 +144,7 @@
   <section class="stats" aria-label="Ключевые цифры">
     <div class="wrap">
       <dl class="stats-grid">
-        <div class="stat"><dd>3</dd><dt>Открытых проекта</dt></div>
+        <div class="stat"><dd>4</dd><dt>Открытых проекта</dt></div>
         <div class="stat"><dd>31</dd><dt>Алгоритм в decisionrl</dt></div>
         <div class="stat"><dd>400</dd><dt>Тестов в decisionrl, покрытие 86%</dt></div>
         <div class="stat"><dd>4&#8239;717</dd><dt>Норм в корпусе praxis</dt></div>
@@ -157,7 +158,7 @@
     <div class="wrap">
       <div class="section-intro">
         <p class="eyebrow"><span class="dot"></span> Проекты</p>
-        <h2>Три системы, один инженерный стандарт</h2>
+        <h2>Четыре системы, один инженерный стандарт</h2>
         <p>
           Каждый проект можно установить сегодня, у каждого есть документация и разрешительная
           лицензия. Все цифры ниже получены скриптом из того же репозитория, а не заявлены в прозе.
@@ -262,6 +263,54 @@
               <div><dt>Последний релиз</dt><dd>v0.2.0</dd></div>
               <div><dt>Требует</dt><dd>Python ≥ 3.10</dd></div>
               <div><dt>Декларативных семейств</dt><dd>4</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <!-- glia -->
+        <article class="project">
+          <div>
+            <div class="project-head">
+              <h3><a href="https://github.com/DrobyshevDev/glia" rel="noopener">glia</a></h3>
+              <span class="project-tag">минимальная библиотека для LLM-агентов со стеклянным ящиком</span>
+            </div>
+            <p>
+              Каждый вызов модели, вызов инструмента и переход состояния — обычный объект, который
+              можно залогировать, сохранить снимком и воспроизвести. Весь цикл умещается в один
+              файл, который читается за вечер. Современные приёмы — инструменты, структурированные
+              ответы, сжатие контекста, устойчивые чекпоинты, guardrails, субагенты,
+              evals-as-tests — поставляются как примитивы, которые можно прочитать, а не как
+              монолит, которому нужно доверять. Нужен графовый движок — берите LangGraph; нужен
+              маленький прозрачный цикл, который вы понимаете целиком, — берите этот.
+            </p>
+            <div class="chips">
+              <span class="chip chip-accent">LLM-агенты</span>
+              <span class="chip">Python 3.10+</span>
+              <span class="chip">Ноль обязательных зависимостей</span>
+              <span class="chip">Типизировано</span>
+              <span class="chip">Воспроизводимые трейсы</span>
+              <span class="chip">Desktop-оболочка</span>
+            </div>
+            <div class="project-links">
+              <a class="primary" href="https://drobyshevdev.github.io/glia/" rel="noopener">Документация</a>
+              <a href="https://pypi.org/project/glia-agents/" rel="noopener">PyPI</a>
+              <a href="https://github.com/DrobyshevDev/glia" rel="noopener">Репозиторий</a>
+            </div>
+          </div>
+
+          <div class="project-aside">
+            <div class="snippet">
+              <button class="copy-btn" type="button" data-copy="pip install glia-agents" aria-label="Скопировать команду">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+              </button>
+              <div><span class="p">$ </span>pip install glia-agents</div>
+              <div class="c"># ядру больше ничего не нужно</div>
+            </div>
+            <dl class="facts">
+              <div><dt>Лицензия</dt><dd>MIT</dd></div>
+              <div><dt>Последний релиз</dt><dd>v0.8.2</dd></div>
+              <div><dt>Требует</dt><dd>Python ≥ 3.10</dd></div>
+              <div><dt>Зависимостей ядра</dt><dd>0</dd></div>
             </dl>
           </div>
         </article>
@@ -459,7 +508,7 @@
         </div>
         <div>
           <dt>Лицензии</dt>
-          <dd>mlango и decisionrl — MIT, praxis — Apache-2.0. Коммерческое использование разрешено обеими.</dd>
+          <dd>mlango, glia и decisionrl — MIT, praxis — Apache-2.0. Коммерческое использование разрешено обеими.</dd>
         </div>
       </dl>
     </div>
@@ -471,8 +520,9 @@
       <div class="cta">
         <h2>Начните с проекта, ближайшего к вашей задаче</h2>
         <p>
-          Фреймворк для ML-работы, библиотека для решений под ней и разобранный пример поиска,
-          который действительно можно проверить. Все три ставятся одной командой.
+          Фреймворк для ML-работы, читаемый агентный цикл, библиотека для решений под ними и
+          разобранный пример поиска, который действительно можно проверить. Все четыре ставятся
+          одной командой.
         </p>
         <div class="cta-actions">
           <a class="btn btn-primary" href="https://github.com/DrobyshevDev" rel="noopener">Открыть организацию</a>
@@ -503,6 +553,7 @@
         <ul role="list">
           <li><a href="https://github.com/DrobyshevDev/praxis" rel="noopener">praxis</a></li>
           <li><a href="https://github.com/DrobyshevDev/mlango" rel="noopener">mlango</a></li>
+          <li><a href="https://github.com/DrobyshevDev/glia" rel="noopener">glia</a></li>
           <li><a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">decisionrl</a></li>
         </ul>
       </div>
@@ -511,8 +562,10 @@
         <h4>Документация</h4>
         <ul role="list">
           <li><a href="https://drobyshevdev.github.io/mlango/" rel="noopener">Документация mlango</a></li>
+          <li><a href="https://drobyshevdev.github.io/glia/" rel="noopener">Документация glia</a></li>
           <li><a href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">Документация decisionrl</a></li>
           <li><a href="https://pypi.org/project/mlango/" rel="noopener">mlango на PyPI</a></li>
+          <li><a href="https://pypi.org/project/glia-agents/" rel="noopener">glia на PyPI</a></li>
           <li><a href="https://pypi.org/project/decisionrl/" rel="noopener">decisionrl на PyPI</a></li>
         </ul>
       </div>
