@@ -1,0 +1,18 @@
+version: 2
+
+# Actions only. The site is hand-written HTML, CSS and one 3 KB script with no
+# build step and no third-party requests — there is no package manifest here for
+# Dependabot to read, and adding one to give it something to do would undo the
+# property `scripts/check_site.py` exists to enforce.
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "ci"
+    groups:
+      actions:
+        patterns: ["*"]
+    open-pull-requests-limit: 5

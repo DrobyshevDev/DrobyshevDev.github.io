@@ -18,9 +18,9 @@ jobs:
     name: Site checks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -31,3 +31,20 @@ jobs:
 
       - name: Check the sitemap is well-formed
         run: python -c "import xml.dom.minidom, sys; xml.dom.minidom.parse('sitemap.xml'); print('sitemap.xml parses')"
+
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [site]
+    steps:
+      # One aggregate check to require in branch protection. There is one job
+      # today, and this is what keeps that from mattering: a second job added
+      # later is covered without touching the protection rule.
+      - name: Fail if any job did not succeed
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: |
+          echo "One or more jobs failed:"
+          echo '${{ toJSON(needs) }}'
+          exit 1
+      - run: echo "All checks passed."
