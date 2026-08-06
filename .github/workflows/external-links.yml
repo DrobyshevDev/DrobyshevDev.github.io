@@ -32,7 +32,7 @@ jobs:
 
       - name: Open an issue when something is broken
         if: steps.lychee.outputs.exit_code != 0
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: Broken outbound links on the site
           content-filepath: ./lychee/out.md
