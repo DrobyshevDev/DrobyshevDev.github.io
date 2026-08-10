@@ -298,6 +298,29 @@
             with a confidence interval and placed on that scale, so «better» means a distance from
             the best achievable result rather than a position on a leaderboard.
           </p>
+
+          <div class="measure">
+            <table>
+              <caption>Headroom between the tuned classical method and the computed optimum, with a 95% bootstrap interval on the paired difference.</caption>
+              <thead>
+                <tr><th>Task</th><th>Headroom</th><th>95% interval</th></tr>
+              </thead>
+              <tbody>
+              <tr><td><code>inventory</code></td><td>+0.4%</td><td>[+0.561, +1.031]</td></tr>
+              <tr><td><code>joint-pricing</code></td><td>+4.3%</td><td>[+3.794, +5.656]</td></tr>
+              <tr><td><code>pricing</code></td><td>+6.2%</td><td>[+1.265, +1.761]</td></tr>
+              <tr><td><code>queueing</code></td><td>+16.9%</td><td>[+3.418, +3.988]</td></tr>
+              <tr><td><code>supply-chain</code></td><td>+17.3%</td><td>[+5.505, +7.493]</td></tr>
+              <tr><td><code>energy</code></td><td>+26.6%</td><td>[+4.221, +4.690]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The spread is the point. Where the textbook answer is already near-optimal there
+            is almost nothing to win; where it cannot plan ahead, a quarter of the value is
+            still on the table. A benchmark whose tasks all leave generous headroom has
+            selected for problems the standard method happens to be bad at.
+          </p>
           <div class="project-links">
             <a href="https://github.com/DrobyshevDev/stadion" rel="noopener">Repository</a>
             <a href="https://pypi.org/project/stadion-rl/" rel="noopener">PyPI</a>

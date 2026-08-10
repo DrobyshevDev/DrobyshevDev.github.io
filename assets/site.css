@@ -429,6 +429,45 @@ h4 { font-size: .8125rem; }
 .copy-btn svg { width: 14px; height: 14px; }
 .copy-btn[data-copied] { color: var(--accent-2); border-color: var(--accent); }
 
+/* A measured table inside a project block. The caption carries the conditions,
+   so the figures above it can be read without the repository open. */
+.measure {
+  margin: 0 0 24px;
+  overflow-x: auto;
+}
+.measure table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.measure caption {
+  caption-side: bottom;
+  padding-top: 12px;
+  text-align: left;
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+.measure th {
+  text-align: left;
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  padding: 0 20px 10px 0;
+  border-bottom: 1px solid var(--line-2);
+}
+.measure td {
+  padding: 11px 20px 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: .9375rem;
+}
+.measure td:first-child { color: var(--fg-2); }
+.measure td:nth-child(2) { font-weight: 600; }
+.measure td:last-child { color: var(--fg-3); font-size: .8125rem; padding-right: 0; }
+.measure code { color: var(--fg-2); }
+
 /* --- Course --------------------------------------------------------------- */
 
 .course {

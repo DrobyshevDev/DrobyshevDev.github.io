@@ -300,6 +300,29 @@
             выдаётся с доверительным интервалом и ставится на эту шкалу, поэтому «лучше» означает
             расстояние до достижимого предела, а не позицию в таблице лидеров.
           </p>
+
+          <div class="measure">
+            <table>
+              <caption>Запас между настроенным классическим методом и посчитанным оптимумом, с 95% бутстрап-интервалом на парной разности.</caption>
+              <thead>
+                <tr><th>Задача</th><th>Запас</th><th>95% интервал</th></tr>
+              </thead>
+              <tbody>
+              <tr><td><code>inventory</code></td><td>+0.4%</td><td>[+0.561, +1.031]</td></tr>
+              <tr><td><code>joint-pricing</code></td><td>+4.3%</td><td>[+3.794, +5.656]</td></tr>
+              <tr><td><code>pricing</code></td><td>+6.2%</td><td>[+1.265, +1.761]</td></tr>
+              <tr><td><code>queueing</code></td><td>+16.9%</td><td>[+3.418, +3.988]</td></tr>
+              <tr><td><code>supply-chain</code></td><td>+17.3%</td><td>[+5.505, +7.493]</td></tr>
+              <tr><td><code>energy</code></td><td>+26.6%</td><td>[+4.221, +4.690]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Разброс здесь и есть содержание. Там, где учебный ответ уже почти оптимален,
+            выигрывать нечего; там, где он не умеет планировать вперёд, на столе остаётся
+            четверть ценности. Бенчмарк, у которого все задачи оставляют щедрый запас,
+            отобран под проблемы, на которых стандартный метод плох.
+          </p>
           <div class="project-links">
             <a href="https://github.com/DrobyshevDev/stadion" rel="noopener">Репозиторий</a>
             <a href="https://pypi.org/project/stadion-rl/" rel="noopener">PyPI</a>
