@@ -1,28 +1,10 @@
 /* DrobyshevDev — site behaviour. Progressive enhancement only:
-   every section is readable and every link works with this file removed. */
+   every section is readable and every link works with this file removed.
+
+   There is no theme code here any more. The site commits to one scheme, so
+   there is nothing to toggle and nothing to remember between visits. */
 (function () {
   "use strict";
-
-  /* --- Theme ------------------------------------------------------------ */
-  // The initial value is applied by an inline script in <head> so the page
-  // never paints in the wrong theme; this only handles the toggle.
-  var root = document.documentElement;
-
-  function currentTheme() {
-    var explicit = root.getAttribute("data-theme");
-    if (explicit) return explicit;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-
-  var toggle = document.querySelector(".theme-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", function () {
-      var next = currentTheme() === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      try { localStorage.setItem("theme", next); } catch (e) { /* private mode */ }
-      toggle.setAttribute("aria-label", toggle.getAttribute("data-label-" + next) || "Switch theme");
-    });
-  }
 
   /* --- Mobile navigation ------------------------------------------------ */
   var navToggle = document.querySelector(".nav-toggle");
@@ -46,9 +28,10 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeNav();
     });
-    // A resize past the breakpoint would otherwise leave the panel stuck open.
+    // Must match the breakpoint in site.css where the panel stops being a
+    // panel. A resize past it would otherwise leave the menu stuck open.
     window.addEventListener("resize", function () {
-      if (window.innerWidth > 900) closeNav();
+      if (window.innerWidth > 760) closeNav();
     });
   }
 

@@ -4,13 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DrobyshevDev — frameworks and tooling for ML, LLM agents and operational decisions</title>
-<meta name="description" content="DrobyshevDev builds open-source frameworks and tooling for machine learning, LLM agents and operational decision systems: praxis, mlango, glia and decisionrl. Typed, tested in CI on Linux, macOS and Windows.">
+<meta name="description" content="DrobyshevDev builds open-source frameworks and tooling for machine learning, LLM agents and operational decision systems: praxis, mlango, glia, decisionrl and stadion. Typed, tested in CI on Linux, macOS and Windows.">
 <link rel="canonical" href="https://drobyshevdev.github.io/">
 <link rel="alternate" hreflang="en" href="https://drobyshevdev.github.io/">
 <link rel="alternate" hreflang="ru" href="https://drobyshevdev.github.io/ru/">
 <link rel="alternate" hreflang="x-default" href="https://drobyshevdev.github.io/">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#08080a">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DrobyshevDev">
@@ -23,14 +22,6 @@
 
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
-
-<script>
-  // Applied before first paint so the page never flashes the wrong theme.
-  try {
-    var t = localStorage.getItem("theme");
-    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
-  } catch (e) {}
-</script>
 
 <script type="application/ld+json">
 {
@@ -50,28 +41,20 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="mark" src="/assets/mark.svg" alt="" width="26" height="26">
+      <img class="mark" src="/assets/mark.svg" alt="" width="22" height="22">
       DrobyshevDev
     </a>
 
     <nav class="nav" id="primary-nav" aria-label="Primary">
       <a href="#projects">Projects</a>
-      <a href="#course">Course</a>
-      <a href="#platform">What we build</a>
-      <a href="#engineering">How we work</a>
-      <a href="#contribute">Contributing</a>
-      <a class="ext" href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a>
+      <a href="#reading">Course</a>
+      <a href="#method">Method</a>
+      <a href="#licensing">Licensing</a>
+      <a href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a>
     </nav>
 
     <div class="nav-tools">
       <a class="lang-switch" href="/ru/" hreflang="ru" lang="ru">RU</a>
-      <button class="icon-btn theme-toggle" type="button"
-              aria-label="Switch colour theme"
-              data-label-dark="Switch to light theme"
-              data-label-light="Switch to dark theme">
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button>
       <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -84,72 +67,44 @@
   <!-- ==================== Hero ==================== -->
   <section class="hero">
     <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <p class="eyebrow"><span class="dot"></span> Open source · Python · MIT and Apache-2.0</p>
+      <p class="eyebrow"><span class="rule"></span> Open source · Python · MIT and Apache-2.0</p>
 
-          <h1>Frameworks and tooling for machine learning, LLM agents and operational decisions.</h1>
+      <h1>Frameworks and tooling for machine learning, LLM agents and operational decisions.</h1>
 
-          <p class="lead">
-            We build the layer between a research result and something a team can run: the project
-            structure, the tracking, the interfaces, and the tests that keep a number honest six
-            months after it was measured. Everything here is open source, typed, and tested in CI
-            on Linux, macOS and Windows.
-          </p>
+      <p class="lead">
+        The layer between a research result and something a team can run: the project structure,
+        the tracking, the interfaces, and the tests that keep a number honest six months after it
+        was measured.
+      </p>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">
-              Explore the projects
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a class="btn btn-secondary" href="https://github.com/DrobyshevDev" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.8 18.3 5.1 18.3 5.1c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
-              View on GitHub
-            </a>
-          </div>
-
-          <p class="hero-meta">
-            <span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-              Four maintained projects
-            </span>
-            <span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="m8 10 2 2-2 2M13 14h3"/></svg>
-              Python 3.9+
-            </span>
-            <span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
-              CI on Linux, macOS, Windows
-            </span>
-          </p>
-        </div>
-
-        <div class="terminal" role="figure" aria-label="Installation commands for the three projects">
-          <div class="terminal-bar"><i></i><i></i><i></i><span class="title">~/drobyshevdev</span></div>
-          <div class="terminal-body">
-            <div class="c"># a framework for ML, analytics and LLM agents</div>
-            <div><span class="p">$ </span>pip install <span class="s">"mlango[sklearn]"</span></div>
-            <div class="c"># a minimal, readable agent loop</div>
-            <div><span class="p">$ </span>pip install glia-agents</div>
-            <div class="c"># reinforcement learning for operational decisions</div>
-            <div><span class="p">$ </span>pip install decisionrl</div>
-            <div class="c"># a legal assistant you can check — no API keys</div>
-            <div><span class="p">$ </span>docker compose up app</div>
-          </div>
-        </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="#projects">
+          See the projects
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-secondary" href="https://github.com/DrobyshevDev" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.8 18.3 5.1 18.3 5.1c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>
+          GitHub
+        </a>
       </div>
-    </div>
-  </section>
 
-  <!-- ==================== Stats ==================== -->
-  <section class="stats" aria-label="Key numbers">
-    <div class="wrap">
-      <dl class="stats-grid">
-        <div class="stat"><dd>4</dd><dt>Open-source projects</dt></div>
-        <div class="stat"><dd>31</dd><dt>Algorithms in decisionrl</dt></div>
-        <div class="stat"><dd>400</dd><dt>Tests in decisionrl, 86% covered</dt></div>
-        <div class="stat"><dd>4&#8239;717</dd><dt>Legal norms indexed in praxis</dt></div>
-        <div class="stat"><dd>3</dd><dt>Platforms in CI</dt></div>
+      <dl class="spec-strip">
+        <div>
+          <dt>Algorithms</dt>
+          <dd>31<span class="sub">In decisionrl, across 22 environments — nine of them applied rather than synthetic.</span></dd>
+        </div>
+        <div>
+          <dt>Required dependencies</dt>
+          <dd>0<span class="sub">The glia core imports nothing outside the standard library. Providers and extras are opt-in.</span></dd>
+        </div>
+        <div>
+          <dt>Line coverage</dt>
+          <dd>86%<span class="sub">decisionrl, measured by pytest-cov in CI. The build fails below the threshold rather than reporting it.</span></dd>
+        </div>
+        <div>
+          <dt>Platforms in CI</dt>
+          <dd>3<span class="sub">Linux, macOS and Windows, on every push. A claim that something runs on Windows is a claim someone checked.</span></dd>
+        </div>
       </dl>
     </div>
   </section>
@@ -157,311 +112,291 @@
   <!-- ==================== Projects ==================== -->
   <section class="band" id="projects">
     <div class="wrap">
-      <div class="section-intro">
-        <p class="eyebrow"><span class="dot"></span> Projects</p>
-        <h2>Four systems, one engineering standard</h2>
-        <p>
-          Each project is installable today, documented, and released under a permissive licence.
-          Every number below is measured by a script in the repository that produced it, not
-          asserted in prose.
+      <div class="section-head">
+        <p class="eyebrow"><span class="rule"></span> Projects</p>
+        <h2>Five systems, one engineering standard</h2>
+        <p class="lead">
+          Each one installs today, carries documentation, and is released under a permissive
+          licence. The numbers beside each project come from a script in the repository that
+          produced them.
         </p>
       </div>
 
-      <div class="projects">
-
-        <!-- praxis -->
-        <article class="project">
-          <div>
-            <div class="project-head">
-              <h3><a href="https://github.com/DrobyshevDev/praxis" rel="noopener">praxis</a></h3>
-              <span class="project-tag">a legal assistant you can check</span>
-            </div>
-            <p>
-              Answers a question about Russian law and returns the specific provisions it rests on,
-              with every citation verified. Retrieval is hybrid — BM25 plus dense embeddings with a
-              cross-encoder reranker — and an NLI model checks that each cited norm actually
-              supports the claim, so a plausible-but-wrong reference is caught rather than shipped.
-              The default answer is extractive, the text of the law itself, and cannot hallucinate;
-              an optional LLM layer passes the same check.
-            </p>
-            <div class="chips">
-              <span class="chip chip-accent">RAG</span>
-              <span class="chip">Python 3.12</span>
-              <span class="chip">FastAPI</span>
-              <span class="chip">Postgres + pgvector</span>
-              <span class="chip">BGE-M3</span>
-              <span class="chip">GraphRAG</span>
-              <span class="chip">self-RAG</span>
-              <span class="chip">Docker</span>
-            </div>
-            <div class="project-links">
-              <a class="primary" href="https://github.com/DrobyshevDev/praxis" rel="noopener">Repository</a>
-              <a href="https://github.com/DrobyshevDev/praxis/releases" rel="noopener">Releases</a>
-              <a href="https://github.com/DrobyshevDev/praxis/blob/master/ARCHITECTURE.md" rel="noopener">Architecture</a>
-            </div>
+      <!-- praxis -->
+      <article class="project">
+        <div>
+          <div class="project-name">
+            <h3><a href="https://github.com/DrobyshevDev/praxis" rel="noopener">praxis</a></h3>
+            <span class="licence">Apache-2.0</span>
           </div>
-
-          <div class="project-aside">
-            <div class="snippet">
-              <button class="copy-btn" type="button" data-copy="docker compose up app" aria-label="Copy command">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-              </button>
-              <div><span class="p">$ </span>docker compose up app</div>
-              <div class="c"># → localhost:8077, no keys</div>
-            </div>
-            <dl class="facts">
-              <div><dt>Licence</dt><dd>Apache-2.0</dd></div>
-              <div><dt>Latest release</dt><dd>v0.1.0</dd></div>
-              <div><dt>Corpus</dt><dd>4&#8239;717 norms</dd></div>
-              <div><dt>recall@5 · MRR</dt><dd>0.92 · 0.94</dd></div>
-            </dl>
+          <p class="claim">A legal assistant whose citations are checked, not asserted.</p>
+          <p>
+            Answers a question about Russian law and returns the provisions it rests on. Retrieval
+            is hybrid — lexical plus dense, with a cross-encoder reranker — and an NLI model checks
+            that each cited norm actually supports the claim, so a plausible-but-wrong reference is
+            caught rather than shipped. The default answer is extractive, the text of the law
+            itself, and cannot hallucinate.
+          </p>
+          <div class="project-links">
+            <a href="https://drobyshevdev.github.io/praxis/" rel="noopener">Documentation</a>
+            <a href="https://github.com/DrobyshevDev/praxis" rel="noopener">Repository</a>
+            <a href="https://github.com/DrobyshevDev/praxis/blob/master/ARCHITECTURE.md" rel="noopener">Architecture</a>
           </div>
-        </article>
+        </div>
 
-        <!-- mlango -->
-        <article class="project">
-          <div>
-            <div class="project-head">
-              <h3><a href="https://github.com/DrobyshevDev/mlango" rel="noopener">mlango</a></h3>
-              <span class="project-tag">a framework for ML, analytics and LLM agents</span>
-            </div>
-            <p>
-              Django's philosophy, applied to machine learning. You declare datasets, models, agents
-              and evaluations; the framework runs them, versions them, records them and shows them
-              to you. One class body becomes an admin page, a documented API endpoint, a migration
-              and a CLI target at once. Agents are a first-class family beside models, sharing one
-              metastore, one admin and one evaluation system — because most tools in this space
-              handle classical ML <em>or</em> LLMs, and most teams are doing both.
-            </p>
-            <div class="chips">
-              <span class="chip chip-accent">Framework</span>
-              <span class="chip">Python 3.10+</span>
-              <span class="chip">scikit-learn</span>
-              <span class="chip">PyTorch</span>
-              <span class="chip">LLM agents</span>
-              <span class="chip">Admin UI</span>
-              <span class="chip">Migrations</span>
-              <span class="chip">Plugins</span>
-            </div>
-            <div class="project-links">
-              <a class="primary" href="https://drobyshevdev.github.io/mlango/" rel="noopener">Documentation</a>
-              <a href="https://pypi.org/project/mlango/" rel="noopener">PyPI</a>
-              <a href="https://github.com/DrobyshevDev/mlango" rel="noopener">Repository</a>
-            </div>
+        <div>
+          <dl class="datasheet">
+            <div><dt>Latest release</dt><dd>v0.1.0</dd></div>
+            <div><dt>recall@5</dt><dd>0.92</dd></div>
+            <div><dt>MRR</dt><dd>0.94</dd></div>
+            <div><dt>Runtime</dt><dd>Python 3.12 · Docker</dd></div>
+          </dl>
+          <div class="command">
+            <button class="copy-btn" type="button" data-copy="docker compose up app" aria-label="Copy command">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+            <div><span class="p">$ </span>docker compose up app</div>
+            <div class="c"># localhost:8077, no API keys</div>
           </div>
+          <p class="note" style="margin-top:14px">
+            Retrieval quality measured on the golden set over the full corpus, tracked run over run.
+          </p>
+        </div>
+      </article>
 
-          <div class="project-aside">
-            <div class="snippet">
-              <button class="copy-btn" type="button" data-copy="pip install &quot;mlango[sklearn]&quot;" aria-label="Copy command">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-              </button>
-              <div><span class="p">$ </span>pip install "mlango[sklearn]"</div>
-              <div><span class="p">$ </span>mlango startproject myproject</div>
-            </div>
-            <dl class="facts">
-              <div><dt>Licence</dt><dd>MIT</dd></div>
-              <div><dt>Latest release</dt><dd>v0.2.0</dd></div>
-              <div><dt>Requires</dt><dd>Python ≥ 3.10</dd></div>
-              <div><dt>Declarative families</dt><dd>4</dd></div>
-            </dl>
+      <!-- mlango -->
+      <article class="project">
+        <div>
+          <div class="project-name">
+            <h3><a href="https://github.com/DrobyshevDev/mlango" rel="noopener">mlango</a></h3>
+            <span class="licence">MIT</span>
           </div>
-        </article>
-
-        <!-- glia -->
-        <article class="project">
-          <div>
-            <div class="project-head">
-              <h3><a href="https://github.com/DrobyshevDev/glia" rel="noopener">glia</a></h3>
-              <span class="project-tag">a glass-box, minimal library for LLM agents</span>
-            </div>
-            <p>
-              Every model call, tool call and state transition is a plain object you can log,
-              snapshot and replay. The whole loop fits in one file you can read in an afternoon.
-              The modern techniques — tools, structured outputs, context compaction, durable
-              checkpoints, guardrails, subagents, evals-as-tests — ship as opt-in primitives you
-              can read, not a monolith you have to trust. If you want a graph engine, use
-              LangGraph; if you want a small, transparent loop you fully understand, use this.
-            </p>
-            <div class="chips">
-              <span class="chip chip-accent">LLM agents</span>
-              <span class="chip">Python 3.10+</span>
-              <span class="chip">Zero required dependencies</span>
-              <span class="chip">Typed</span>
-              <span class="chip">Replayable traces</span>
-              <span class="chip">Desktop shell</span>
-            </div>
-            <div class="project-links">
-              <a class="primary" href="https://drobyshevdev.github.io/glia/" rel="noopener">Documentation</a>
-              <a href="https://pypi.org/project/glia-agents/" rel="noopener">PyPI</a>
-              <a href="https://github.com/DrobyshevDev/glia" rel="noopener">Repository</a>
-            </div>
+          <p class="claim">Django's philosophy, applied to machine learning.</p>
+          <p>
+            You declare datasets, models, agents and evaluations; the framework runs them, versions
+            them, records them and shows them to you. One class body becomes an admin page, a
+            documented API endpoint, a migration and a CLI target at once. Agents sit beside models
+            as a first-class family, sharing one metastore, one admin and one evaluation system.
+          </p>
+          <div class="project-links">
+            <a href="https://drobyshevdev.github.io/mlango/" rel="noopener">Documentation</a>
+            <a href="https://pypi.org/project/mlango/" rel="noopener">PyPI</a>
+            <a href="https://github.com/DrobyshevDev/mlango" rel="noopener">Repository</a>
           </div>
+        </div>
 
-          <div class="project-aside">
-            <div class="snippet">
-              <button class="copy-btn" type="button" data-copy="pip install glia-agents" aria-label="Copy command">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-              </button>
-              <div><span class="p">$ </span>pip install glia-agents</div>
-              <div class="c"># the core needs nothing else</div>
-            </div>
-            <dl class="facts">
-              <div><dt>Licence</dt><dd>MIT</dd></div>
-              <div><dt>Latest release</dt><dd>v0.8.2</dd></div>
-              <div><dt>Requires</dt><dd>Python ≥ 3.10</dd></div>
-              <div><dt>Core dependencies</dt><dd>0</dd></div>
-            </dl>
+        <div>
+          <dl class="datasheet">
+            <div><dt>Latest release</dt><dd>v0.2.0</dd></div>
+            <div><dt>Requires</dt><dd>Python ≥ 3.10</dd></div>
+            <div><dt>Declarative families</dt><dd>4</dd></div>
+            <div><dt>CI matrix</dt><dd>4 versions · 3 platforms</dd></div>
+          </dl>
+          <div class="command">
+            <button class="copy-btn" type="button" data-copy="pip install &quot;mlango[sklearn]&quot;" aria-label="Copy command">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+            <div><span class="p">$ </span>pip install <span class="s">"mlango[sklearn]"</span></div>
+            <div><span class="p">$ </span>mlango startproject myproject</div>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- decisionrl -->
-        <article class="project">
-          <div>
-            <div class="project-head">
-              <h3><a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">decisionrl</a></h3>
-              <span class="project-tag">reinforcement learning for operational decisions</span>
-            </div>
-            <p>
-              Pricing, inventory, energy, queues and supply chains: the decisions a business makes
-              thousands of times a day, where a small policy improvement compounds. Every applied
-              environment ships with the classical operations-research baseline beside it, so a
-              learned policy is measured against the standard method rather than asserted to be
-              good — and where the classical method is already optimal, the README says so.
-            </p>
-            <div class="chips">
-              <span class="chip chip-accent">Reinforcement learning</span>
-              <span class="chip">Python 3.9+</span>
-              <span class="chip">PyTorch</span>
-              <span class="chip">NumPy</span>
-              <span class="chip">Gymnasium</span>
-              <span class="chip">mypy</span>
-              <span class="chip">ruff</span>
-            </div>
-            <div class="project-links">
-              <a class="primary" href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">Documentation</a>
-              <a href="https://pypi.org/project/decisionrl/" rel="noopener">PyPI</a>
-              <a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">Repository</a>
-            </div>
+      <!-- glia -->
+      <article class="project">
+        <div>
+          <div class="project-name">
+            <h3><a href="https://github.com/DrobyshevDev/glia" rel="noopener">glia</a></h3>
+            <span class="licence">MIT</span>
           </div>
-
-          <div class="project-aside">
-            <div class="snippet">
-              <button class="copy-btn" type="button" data-copy="pip install decisionrl" aria-label="Copy command">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-              </button>
-              <div><span class="p">$ </span>pip install decisionrl</div>
-              <div class="c"># or "decisionrl[gym]"</div>
-            </div>
-            <dl class="facts">
-              <div><dt>Licence</dt><dd>MIT</dd></div>
-              <div><dt>Latest release</dt><dd>v0.4.0</dd></div>
-              <div><dt>Algorithms</dt><dd>31</dd></div>
-              <div><dt>Environments</dt><dd>22 (9 applied)</dd></div>
-            </dl>
+          <p class="claim">An agent loop you can read in an afternoon.</p>
+          <p>
+            Every model call, tool call and state transition is a plain object you can log, snapshot
+            and replay. The modern techniques — tools, structured outputs, context compaction,
+            durable checkpoints, guardrails, subagents, evals-as-tests — ship as opt-in primitives
+            you can read, not a monolith you have to trust. For a graph engine, use LangGraph. For a
+            small transparent loop you fully understand, use this.
+          </p>
+          <div class="project-links">
+            <a href="https://drobyshevdev.github.io/glia/" rel="noopener">Documentation</a>
+            <a href="https://pypi.org/project/glia-agents/" rel="noopener">PyPI</a>
+            <a href="https://github.com/DrobyshevDev/glia" rel="noopener">Repository</a>
           </div>
-        </article>
+        </div>
 
-      </div>
+        <div>
+          <dl class="datasheet">
+            <div><dt>Latest release</dt><dd>v0.8.2</dd></div>
+            <div><dt>Requires</dt><dd>Python ≥ 3.10</dd></div>
+            <div><dt>Core dependencies</dt><dd>0</dd></div>
+            <div><dt>Coverage gate</dt><dd>90%</dd></div>
+          </dl>
+          <div class="command">
+            <button class="copy-btn" type="button" data-copy="pip install glia-agents" aria-label="Copy command">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+            <div><span class="p">$ </span>pip install glia-agents</div>
+            <div class="c"># the core needs nothing else</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- decisionrl -->
+      <article class="project">
+        <div>
+          <div class="project-name">
+            <h3><a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">decisionrl</a></h3>
+            <span class="licence">MIT</span>
+          </div>
+          <p class="claim">Reinforcement learning for decisions that have a cost function.</p>
+          <p>
+            Pricing, inventory, energy, queues and supply chains: the decisions a business makes
+            thousands of times a day, where a small policy improvement compounds. Every applied
+            environment ships with the classical operations-research baseline beside it, so a
+            learned policy is measured against the standard method. Where the classical method is
+            already optimal, the documentation says so and shows the learned policy matching it.
+          </p>
+          <div class="project-links">
+            <a href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">Documentation</a>
+            <a href="https://pypi.org/project/decisionrl/" rel="noopener">PyPI</a>
+            <a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">Repository</a>
+          </div>
+        </div>
+
+        <div>
+          <dl class="datasheet">
+            <div><dt>Latest release</dt><dd>v0.4.0</dd></div>
+            <div><dt>Algorithms</dt><dd>31</dd></div>
+            <div><dt>Environments</dt><dd>22 · 9 applied</dd></div>
+            <div><dt>Line coverage</dt><dd>86%</dd></div>
+          </dl>
+          <div class="command">
+            <button class="copy-btn" type="button" data-copy="pip install decisionrl" aria-label="Copy command">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+            <div><span class="p">$ </span>pip install decisionrl</div>
+            <div class="c"># or "decisionrl[gym]"</div>
+          </div>
+          <p class="note" style="margin-top:14px">
+            A nightly job re-trains the applied tasks over several seeds, so a number in the
+            documentation fails as soon as it stops being true.
+          </p>
+        </div>
+      </article>
+
+      <!-- stadion -->
+      <article class="project">
+        <div>
+          <div class="project-name">
+            <h3><a href="https://github.com/DrobyshevDev/stadion" rel="noopener">stadion</a></h3>
+            <span class="licence">MIT</span>
+          </div>
+          <p class="claim">A proving ground where an agent is scored against the exact optimum.</p>
+          <p>
+            Operational decision tasks with two reference arms shipped beside every agent: the tuned
+            classical method, and the optimum computed by dynamic programming. A score is reported
+            with a confidence interval and placed on that scale, so «better» means a distance from
+            the best achievable result rather than a position on a leaderboard.
+          </p>
+          <div class="project-links">
+            <a href="https://github.com/DrobyshevDev/stadion" rel="noopener">Repository</a>
+            <a href="https://pypi.org/project/stadion-rl/" rel="noopener">PyPI</a>
+          </div>
+        </div>
+
+        <div>
+          <dl class="datasheet">
+            <div><dt>Latest release</dt><dd>v0.1.0</dd></div>
+            <div><dt>Distribution</dt><dd>stadion-rl</dd></div>
+            <div><dt>Reference arms</dt><dd>2 per task</dd></div>
+            <div><dt>CI matrix</dt><dd>4 versions · 3 platforms</dd></div>
+          </dl>
+          <div class="command">
+            <button class="copy-btn" type="button" data-copy="pip install stadion-rl" aria-label="Copy command">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            </button>
+            <div><span class="p">$ </span>pip install stadion-rl</div>
+            <div class="c"># the optimum is computed, not assumed</div>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- ==================== Course ==================== -->
-  <section class="band" id="course" style="padding-top:0">
+  <!-- ==================== Course and research ==================== -->
+  <section class="band band-2" id="reading">
     <div class="wrap">
-      <div class="cta" style="text-align:left">
-        <p class="eyebrow"><span class="dot"></span> Course · free</p>
-        <h2 style="margin:12px 0 14px">Want to learn ML, DL and RL? Here is the whole road, free.</h2>
-        <p style="margin:0 0 24px;max-width:70ch">
-          <strong>lemma</strong> is a complete roadmap through machine learning, neural
-          networks, reinforcement learning and recommender systems: twenty-seven modules from
-          the arithmetic of a mean to reproducing a recent paper. No sign-up, no first module
-          free, no instalments. The central skill is checking a claim rather than launching a
-          training run — module one is about baselines and confidence intervals, before any
-          machine learning at all. Written in Russian; the notebooks run on a CPU in seconds.
-        </p>
-        <div class="cta-actions" style="justify-content:flex-start">
-          <a class="btn btn-primary" href="https://drobyshevdev.github.io/lemma/" rel="noopener">Start the course</a>
-          <a class="btn btn-secondary" href="https://github.com/DrobyshevDev/lemma" rel="noopener">Repository</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== Platform ==================== -->
-  <section class="band band-alt" id="platform">
-    <div class="wrap">
-      <div class="section-intro">
-        <p class="eyebrow"><span class="dot"></span> What we build</p>
-        <h2>The part of the work that usually gets skipped</h2>
-        <p>
-          A model that works in a notebook is a third of a system. The rest is structure, evidence
-          and an interface — and that is the part we ship.
-        </p>
+      <div class="section-head">
+        <p class="eyebrow"><span class="rule"></span> Course and research</p>
+        <h2>Written to be checked</h2>
       </div>
 
-      <div class="cols">
-        <div class="col">
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
-          </div>
-          <h3>Structure that outlives the sprint</h3>
+      <div class="course">
+        <div>
+          <h3 style="margin-bottom:14px">lemma — the road into ML, DL and RL</h3>
           <p>
-            A project layout, a settings module, declarative classes and migrations — the answer web
-            development already found. It is what stops an ML repository turning into a pile of
-            scripts and a <code>checkpoints/</code> directory nobody can map back to a commit.
+            Twenty-seven modules from the arithmetic of a mean to reproducing a recent paper. No
+            sign-up, no first module free, no instalments. The central skill is checking a claim
+            rather than launching a training run, so module one is about baselines and confidence
+            intervals, before any machine learning at all. Written in Russian; the notebooks run on
+            a CPU in seconds and are executed in CI on Linux and Windows, because a reader whose
+            notebook does not start has no course.
           </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://drobyshevdev.github.io/lemma/" rel="noopener">Open the course</a>
+            <a class="btn btn-secondary" href="https://github.com/DrobyshevDev/lemma" rel="noopener">Repository</a>
+          </div>
+
+          <h3 style="margin:56px 0 14px">research — open reading notes</h3>
+          <p>
+            Notes on machine learning, reinforcement learning, neuroscience and the methods used to
+            check a claim. A paper says what it found; a note here says what it showed, which is a
+            smaller thing, and marks the distance between them. Every note declares the sources it
+            rests on, and CI rejects one that does not.
+          </p>
+          <div class="actions">
+            <a class="btn btn-secondary" href="https://drobyshevdev.github.io/research/" rel="noopener">Read the notes</a>
+          </div>
         </div>
 
-        <div class="col">
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-          </div>
-          <h3>Numbers you can re-derive</h3>
-          <p>
-            Runs are versioned and content-addressed, seeds are fixed, splits are deterministic, and
-            the git commit is captured with the metrics. A published figure comes with the script
-            that produces it, so it can be checked rather than believed.
-          </p>
-        </div>
-
-        <div class="col">
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14h8"/></svg>
-          </div>
-          <h3>Interfaces, not just libraries</h3>
-          <p>
-            An admin page, a documented HTTP API and a CLI target generated from the same
-            declaration. The result is reachable by a colleague who will never open the source, and
-            that is usually the difference between a prototype and a tool.
+        <div>
+          <dl class="datasheet">
+            <div><dt>lemma · modules</dt><dd>27</dd></div>
+            <div><dt>lemma · language</dt><dd>Russian</dd></div>
+            <div><dt>lemma · licence</dt><dd>CC BY 4.0 · MIT</dd></div>
+            <div><dt>research · licence</dt><dd>CC BY 4.0 · MIT</dd></div>
+            <div><dt>Price</dt><dd>Free</dd></div>
+          </dl>
+          <p class="note" style="margin-top:14px">
+            Prose under CC BY 4.0, code under MIT. Attribution is the only condition.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== Engineering ==================== -->
-  <section class="band" id="engineering">
+  <!-- ==================== Method ==================== -->
+  <section class="band" id="method">
     <div class="wrap">
-      <div class="section-intro">
-        <p class="eyebrow"><span class="dot"></span> How we work</p>
+      <div class="section-head">
+        <p class="eyebrow"><span class="rule"></span> Method</p>
         <h2>Five rules every repository is held to</h2>
-        <p>
-          These are review criteria, not aspirations. A pull request that breaks one of them gets
-          comments.
+        <p class="lead">
+          Review criteria, not aspirations. A pull request that breaks one of them gets comments.
         </p>
       </div>
 
-      <div class="principles">
-        <div class="principle">
+      <div class="rules">
+        <div class="rule">
           <span class="num">01</span>
           <h3>Errors teach</h3>
           <p>
             A message is read at the worst possible moment by someone who does not have the source
-            open. It should say what went wrong <em>and</em> what to do next, and list the
-            alternatives when there are any.
+            open. It should say what went wrong and what to do next, and list the alternatives when
+            there are any.
           </p>
         </div>
-        <div class="principle">
+        <div class="rule">
           <span class="num">02</span>
           <h3>Tests are named after the guarantee they protect</h3>
           <p>
@@ -469,17 +404,17 @@
             A test whose name does not survive being read aloud is not documenting anything.
           </p>
         </div>
-        <div class="principle">
+        <div class="rule">
           <span class="num">03</span>
           <h3>Verification beats assertion</h3>
           <p>
-            A green pipeline on one machine is not evidence. Every claim we publish — an accuracy, a
-            benchmark, a "this works on Windows" — is measured on the run it describes, and the
+            A green pipeline on one machine is not evidence. Every published claim — an accuracy, a
+            benchmark, a «this works on Windows» — is measured on the run it describes, and the
             numbers in a README are pinned by tests, because prose rots quietly and a failing test
             does not.
           </p>
         </div>
-        <div class="principle">
+        <div class="rule">
           <span class="num">04</span>
           <h3>Comments explain why</h3>
           <p>
@@ -487,68 +422,48 @@
             see.
           </p>
         </div>
-        <div class="principle">
+        <div class="rule">
           <span class="num">05</span>
           <h3>No hidden control flow</h3>
           <p>
             If a framework does something on your behalf, it should be possible to find the line
-            where it happens. Convenience that cannot be traced is a debt with no repayment
-            schedule.
+            where it happens.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== Contributing ==================== -->
-  <section class="band band-alt" id="contribute">
+  <!-- ==================== Licensing and contributing ==================== -->
+  <section class="band band-2" id="licensing">
     <div class="wrap">
-      <div class="section-intro">
-        <p class="eyebrow"><span class="dot"></span> Working with us</p>
-        <h2>Issues and pull requests are welcome on every project</h2>
-        <p>
-          Every repository has a <code>CONTRIBUTING.md</code> — its own, or the organisation-wide
-          default — covering the checks CI will run and the standards review will hold you to, so
-          there is no unwritten rule to discover after the fact.
-        </p>
+      <div class="section-head">
+        <p class="eyebrow"><span class="rule"></span> Licensing and contributing</p>
+        <h2>Terms, in one place</h2>
       </div>
 
-      <dl class="contact-list">
+      <dl class="rows">
         <div>
-          <dt>Contribute</dt>
-          <dd>Open an issue describing the change, then a pull request against the default branch. CI runs on Linux, macOS and Windows before review.</dd>
+          <dt>Licences</dt>
+          <dd>mlango, glia, decisionrl and stadion are MIT. praxis is Apache-2.0. Course and research prose is CC BY 4.0, its code MIT. Commercial use is permitted under all of them.</dd>
         </div>
         <div>
-          <dt>Report a vulnerability</dt>
-          <dd>Use GitHub's private vulnerability reporting on the affected repository — never a public issue.</dd>
+          <dt>Contributing</dt>
+          <dd>Open an issue describing the change, then a pull request against the default branch. Every repository carries a <code>CONTRIBUTING.md</code> — its own or the organisation-wide default — with the checks CI will run, so there is no unwritten rule to discover afterwards.</dd>
+        </div>
+        <div>
+          <dt>Reporting a vulnerability</dt>
+          <dd>Use GitHub's private vulnerability reporting on the affected repository. Never a public issue.</dd>
         </div>
         <div>
           <dt>Documentation</dt>
-          <dd>Written in English and Russian, structured so a third language is one file per page rather than a fork.</dd>
+          <dd>English and Russian, structured so a third language is one file per page rather than a fork.</dd>
         </div>
         <div>
-          <dt>Licensing</dt>
-          <dd>mlango, glia and decisionrl are MIT; praxis is Apache-2.0. Commercial use is permitted under both.</dd>
+          <dt>Code of conduct</dt>
+          <dd>Contributor Covenant, organisation-wide. Reports go privately to the address on the organisation profile.</dd>
         </div>
       </dl>
-    </div>
-  </section>
-
-  <!-- ==================== CTA ==================== -->
-  <section class="band">
-    <div class="wrap">
-      <div class="cta">
-        <h2>Start with the project closest to your problem</h2>
-        <p>
-          A framework for the ML work, a readable agent loop, a library for the decisions
-          underneath it, and a worked example of retrieval you can actually audit. All four
-          install in one command.
-        </p>
-        <div class="cta-actions">
-          <a class="btn btn-primary" href="https://github.com/DrobyshevDev" rel="noopener">Browse the organisation</a>
-          <a class="btn btn-secondary" href="https://drobyshevdev.github.io/mlango/" rel="noopener">Read the mlango docs</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -559,7 +474,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="/">
-          <img class="mark" src="/assets/mark.svg" alt="" width="26" height="26">
+          <img class="mark" src="/assets/mark.svg" alt="" width="22" height="22">
           DrobyshevDev
         </a>
         <p>
@@ -575,19 +490,19 @@
           <li><a href="https://github.com/DrobyshevDev/mlango" rel="noopener">mlango</a></li>
           <li><a href="https://github.com/DrobyshevDev/glia" rel="noopener">glia</a></li>
           <li><a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">decisionrl</a></li>
+          <li><a href="https://github.com/DrobyshevDev/stadion" rel="noopener">stadion</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Documentation</h4>
         <ul role="list">
-          <li><a href="https://drobyshevdev.github.io/mlango/" rel="noopener">mlango docs</a></li>
-          <li><a href="https://drobyshevdev.github.io/glia/" rel="noopener">glia docs</a></li>
+          <li><a href="https://drobyshevdev.github.io/praxis/" rel="noopener">praxis</a></li>
+          <li><a href="https://drobyshevdev.github.io/mlango/" rel="noopener">mlango</a></li>
+          <li><a href="https://drobyshevdev.github.io/glia/" rel="noopener">glia</a></li>
+          <li><a href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">decisionrl</a></li>
           <li><a href="https://drobyshevdev.github.io/lemma/" rel="noopener">lemma, the course</a></li>
-          <li><a href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">decisionrl docs</a></li>
-          <li><a href="https://pypi.org/project/mlango/" rel="noopener">mlango on PyPI</a></li>
-          <li><a href="https://pypi.org/project/glia-agents/" rel="noopener">glia on PyPI</a></li>
-          <li><a href="https://pypi.org/project/decisionrl/" rel="noopener">decisionrl on PyPI</a></li>
+          <li><a href="https://drobyshevdev.github.io/research/" rel="noopener">research</a></li>
         </ul>
       </div>
 
@@ -595,8 +510,8 @@
         <h4>Organisation</h4>
         <ul role="list">
           <li><a href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a></li>
-          <li><a href="#engineering">How we work</a></li>
-          <li><a href="#contribute">Contributing</a></li>
+          <li><a href="#method">Method</a></li>
+          <li><a href="#licensing">Licensing</a></li>
           <li><a href="/ru/" hreflang="ru" lang="ru">Русская версия</a></li>
           <li><a href="/legal/" hreflang="ru" lang="ru">Юридическая информация</a></li>
         </ul>
@@ -604,8 +519,8 @@
     </div>
 
     <div class="footer-bottom">
-      <p>© <span data-year>2026</span> DrobyshevDev. Source code released under MIT and Apache-2.0.</p>
-      <p>Built as a static site. No trackers, no third-party requests.</p>
+      <p>© <span data-year>2026</span> DrobyshevDev. Source under MIT and Apache-2.0.</p>
+      <p>Static site. No trackers, no third-party requests.</p>
     </div>
   </div>
 </footer>
