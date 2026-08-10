@@ -1,0 +1,58 @@
+name: Publish the site
+
+# GitHub's legacy branch build served this site until 6 August 2026, when it
+# began failing on every push - three in a row, on commits that touched only
+# workflow files, with a duration of zero and no log to read. A legacy build
+# reports "Page build failed" and nothing else, so there is nothing to fix from
+# the outside.
+#
+# Deploying through Actions replaces it with a build that has a log, a status
+# check, and a notification when it breaks. It also lets the artefact be
+# assembled explicitly, so `scripts/` and `README.md` stop being published
+# alongside the site.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Assemble the site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Named rather than globbed: a new top-level directory should have to be
+      # added here deliberately, not published because it happened to exist.
+      - name: Collect what is published
+        run: |
+          mkdir -p _site
+          cp index.html 404.html robots.txt sitemap.xml .nojekyll _site/
+          cp -r assets legal ru _site/
+          find _site -type f | sort
+
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    name: Deploy to Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
