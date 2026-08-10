@@ -508,6 +508,13 @@ h4 { font-size: .8125rem; }
 }
 .footer-col a:hover { color: var(--fg); }
 
+/* A link whose destination is in the other language says so, rather than
+   showing the reader a label they cannot read and letting them find out by
+   clicking. The switcher itself is exempt: it is written in the language it
+   points at on purpose, because that is what a speaker of that language
+   recognises. */
+.lang-note { color: var(--fg-3); }
+
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
