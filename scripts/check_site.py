@@ -11,6 +11,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import sys
 from dataclasses import dataclass, field
 from html.parser import HTMLParser
@@ -52,6 +53,7 @@ class Page:
     meta: dict[str, str] = field(default_factory=dict)
     canonical: str | None = None
     hreflang: dict[str, str] = field(default_factory=dict)
+    jsonld: list[str] = field(default_factory=list)
 
 
 class PageParser(HTMLParser):
@@ -61,6 +63,7 @@ class PageParser(HTMLParser):
         self.stack: list[tuple[str, int]] = []
         self.skip_depth = 0
         self.in_title = False
+        self.in_jsonld = False
 
     # -- structure ---------------------------------------------------------
 
@@ -90,6 +93,9 @@ class PageParser(HTMLParser):
                 self.page.images_without_alt.append(line)
             self._record_asset(a.get("src", ""), line)
         elif tag == "script":
+            if a.get("type", "").lower() == "application/ld+json":
+                self.in_jsonld = True
+                self.page.jsonld.append("")
             self._record_asset(a.get("src", ""), line)
         elif tag == "link":
             rel = a.get("rel", "").lower()
@@ -119,6 +125,8 @@ class PageParser(HTMLParser):
             return
         if tag == "title":
             self.in_title = False
+        if tag == "script":
+            self.in_jsonld = False
         if tag in VOID_ELEMENTS:
             return
         for i in range(len(self.stack) - 1, -1, -1):
@@ -132,6 +140,8 @@ class PageParser(HTMLParser):
     def handle_data(self, data: str) -> None:
         if self.in_title:
             self.page.title += data
+        if self.in_jsonld and self.page.jsonld:
+            self.page.jsonld[-1] += data
 
     # -- helpers -----------------------------------------------------------
 
@@ -217,9 +227,20 @@ def main(argv: list[str]) -> int:
         for tag in ("en", "ru", "x-default"):
             if tag not in page.hreflang:
                 fail(rel, f"missing hreflang alternate for '{tag}'")
-        for prop in ("og:title", "og:description", "og:url", "og:type"):
+        for prop in ("og:title", "og:description", "og:url", "og:type", "og:image"):
             if not page.meta.get(prop):
                 fail(rel, f"missing Open Graph property {prop}")
+
+        # og:image is an absolute URL, so it never passes through the link
+        # resolver above -- and a card that 404s is worse than no card, because
+        # every platform caches the miss.
+        card = page.meta.get("og:image", "")
+        if card:
+            path = urlparse(card).path.lstrip("/")
+            if not (root / path).exists():
+                fail(rel, f"og:image points at {card}, but {path} is not in the repository")
+        if page.meta.get("twitter:card") == "summary" and card:
+            fail(rel, "twitter:card is 'summary' but a 1200x630 image is set; use 'summary_large_image'")
 
     # The two language pages must stay mirrors of each other.
     en, ru = pages["index.html"], pages["ru/index.html"]
@@ -230,6 +251,20 @@ def main(argv: list[str]) -> int:
     if sections_en != sections_ru:
         missing = sections_en ^ sections_ru
         fail("site", f"the two language pages have diverged; sections only on one side: {sorted(missing)}")
+
+    # Structured data. A JSON-LD block with a syntax error is silently ignored
+    # by every consumer, so the page looks fine and the rich result never
+    # appears -- exactly the kind of failure nobody notices.
+    for rel, page in pages.items():
+        for i, block in enumerate(page.jsonld, 1):
+            try:
+                data = json.loads(block)
+            except json.JSONDecodeError as exc:
+                fail(rel, f"JSON-LD block {i} does not parse: {exc}")
+                continue
+            for node in data.get("@graph", [data]):
+                if not node.get("@type"):
+                    fail(rel, f"JSON-LD block {i} has a node without @type")
 
     # Files the deployment depends on.
     for required in ("robots.txt", "sitemap.xml", ".nojekyll", "assets/site.css", "assets/site.js"):

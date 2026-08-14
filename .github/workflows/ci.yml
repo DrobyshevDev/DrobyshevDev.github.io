@@ -32,11 +32,32 @@ jobs:
       - name: Check the sitemap is well-formed
         run: python -c "import xml.dom.minidom, sys; xml.dom.minidom.parse('sitemap.xml'); print('sitemap.xml parses')"
 
+  card:
+    name: Social card is current
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      # Pillow is needed to render the card, and only here: the file is
+      # committed, so nobody building or reading the site ever installs it.
+      - run: pip install "pillow>=10"
+
+      # The card names the projects the front page leads with. Adding a project
+      # to the site and forgetting the card leaves a preview that is quietly a
+      # release behind, and nobody notices, because the person who shares the
+      # link is never the person who edited the page.
+      - name: Check the card matches the generator
+        run: python scripts/make_og_image.py --check
+
   ci:
     name: CI
     runs-on: ubuntu-latest
     if: always()
-    needs: [site]
+    needs: [site, card]
     steps:
       # One aggregate check to require in branch protection. There is one job
       # today, and this is what keeps that from mattering: a second job added

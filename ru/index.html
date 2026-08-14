@@ -18,20 +18,92 @@
 <meta property="og:title" content="DrobyshevDev — фреймворки и инструменты для ML, LLM-агентов и операционных решений">
 <meta property="og:description" content="Открытые фреймворки и инструменты для машинного обучения, LLM-агентов и систем операционных решений. Типизировано, проверяется на Linux, macOS и Windows.">
 <meta property="og:url" content="https://drobyshevdev.github.io/ru/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://drobyshevdev.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DrobyshevDev — фреймворки и инструменты для машинного обучения и LLM-агентов. praxis, mlango, glia, decisionrl, stadion.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://drobyshevdev.github.io/assets/og.png">
 
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "DrobyshevDev",
-  "url": "https://drobyshevdev.github.io/",
-  "logo": "https://drobyshevdev.github.io/assets/mark.svg",
-  "description": "Открытые фреймворки и инструменты для машинного обучения, LLM-агентов и систем операционных решений.",
-  "sameAs": ["https://github.com/DrobyshevDev"]
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://drobyshevdev.github.io/#org",
+      "name": "DrobyshevDev",
+      "url": "https://drobyshevdev.github.io/",
+      "logo": "https://drobyshevdev.github.io/assets/mark.svg",
+      "image": "https://drobyshevdev.github.io/assets/og.png",
+      "description": "Открытые фреймворки и инструменты для машинного обучения, LLM-агентов и систем принятия операционных решений.",
+      "sameAs": ["https://github.com/DrobyshevDev"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "business enquiries",
+        "email": "denidrob138@gmail.com",
+        "availableLanguage": ["en", "ru"]
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "praxis",
+      "description": "A legal assistant for Russian law that answers with the provisions it rests on, every citation verified by an NLI model.",
+      "codeRepository": "https://github.com/DrobyshevDev/praxis",
+      "programmingLanguage": "Python",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "author": { "@id": "https://drobyshevdev.github.io/#org" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "mlango",
+      "description": "A batteries-included framework for machine learning, analytics and LLM agents, built on Django's philosophy.",
+      "codeRepository": "https://github.com/DrobyshevDev/mlango",
+      "programmingLanguage": "Python",
+      "license": "https://opensource.org/licenses/MIT",
+      "author": { "@id": "https://drobyshevdev.github.io/#org" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "glia",
+      "description": "A glass-box, minimal library for building LLM agents: modern techniques as opt-in primitives, no hidden control flow.",
+      "codeRepository": "https://github.com/DrobyshevDev/glia",
+      "programmingLanguage": "Python",
+      "license": "https://opensource.org/licenses/MIT",
+      "author": { "@id": "https://drobyshevdev.github.io/#org" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "decisionrl",
+      "description": "Reinforcement learning for operational decisions, each applied environment shipped with its classical operations-research baseline.",
+      "codeRepository": "https://github.com/DrobyshevDev/decisionrl",
+      "programmingLanguage": "Python",
+      "license": "https://opensource.org/licenses/MIT",
+      "author": { "@id": "https://drobyshevdev.github.io/#org" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "stadion",
+      "description": "A proving ground for operational decisions: agents scored against the tuned classical method and the exact optimum, with a confidence interval.",
+      "codeRepository": "https://github.com/DrobyshevDev/stadion",
+      "programmingLanguage": "Python",
+      "license": "https://opensource.org/licenses/MIT",
+      "author": { "@id": "https://drobyshevdev.github.io/#org" }
+    },
+    {
+      "@type": "Course",
+      "name": "lemma",
+      "description": "A free course covering machine learning, neural networks, reinforcement learning and recommender systems, from zero to reading and reproducing research.",
+      "url": "https://drobyshevdev.github.io/lemma/",
+      "inLanguage": "ru",
+      "isAccessibleForFree": true,
+      "provider": { "@id": "https://drobyshevdev.github.io/#org" }
+    }
+  ]
 }
 </script>
 </head>
@@ -469,6 +541,10 @@
 
       <dl class="rows">
         <div>
+          <dt>Коммерческие вопросы</dt>
+          <dd>Интеграция, нужная вашей команде фича в апстриме или работа над смежной задачей — <a href="mailto:denidrob138@gmail.com?subject=DrobyshevDev%20—%20запрос">denidrob138@gmail.com</a>. Напишите, что строите и что мешает; для первого ответа этого достаточно.</dd>
+        </div>
+        <div>
           <dt>Лицензии</dt>
           <dd>mlango, glia, decisionrl и stadion — MIT. praxis — Apache-2.0. Текст курса и разборов — CC BY 4.0, код в них — MIT. Коммерческое использование разрешено всеми.</dd>
         </div>
@@ -545,7 +621,7 @@
 
     <div class="footer-bottom">
       <p>© <span data-year>2026</span> DrobyshevDev. Исходный код под MIT и Apache-2.0.</p>
-      <p>Статический сайт. Ни трекеров, ни сторонних запросов.</p>
+      <p>Статический сайт. Ни трекеров, ни сторонних запросов — <a href="https://github.com/DrobyshevDev/DrobyshevDev.github.io/blob/main/scripts/check_site.py" rel="noopener">это проверяется в CI</a>, а не заявляется.</p>
     </div>
   </div>
 </footer>
