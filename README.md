@@ -72,10 +72,14 @@ pip install "pillow>=10"
 python scripts/make_og_image.py
 ```
 
-The card names the projects the front page leads with. CI runs `--check`, which re-renders
-it and fails if the committed file no longer matches — otherwise adding a project to the
-page leaves a preview quietly a release behind, and nobody notices, because the person who
-shares the link is never the person who edited the page.
+The card names the projects the front page leads with. CI runs `--check`, which fails if
+that list has drifted from the page — otherwise adding a project leaves a preview quietly a
+release behind, and nobody notices, because the person who shares the link is never the
+person who edited the page.
+
+`--check` compares the project list and the dimensions, not the rendered bytes. The card is
+drawn with whatever fonts the machine has, and a Linux runner has neither Georgia nor
+Calibri; byte equality would mean vendoring those, which their licences do not allow.
 
 Pillow is needed only to regenerate the card. Building and serving the site needs nothing.
 

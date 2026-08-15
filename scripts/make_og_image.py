@@ -2,11 +2,16 @@
 """Render the social preview card that appears when the site is linked.
 
 The card is generated rather than drawn by hand so it can be regenerated when
-the wording or the project list changes, and so the file in the repository is
-reproducible: same script, same output, byte for byte.
+the wording or the project list changes.
+
+The output is not byte-reproducible across machines: it is drawn with whatever
+fonts are installed, and a Linux runner has neither Georgia nor Calibri.
+Vendoring those is not an option their licences allow, so --check verifies the
+card still says the right things rather than that it renders to the same bytes.
 
     python scripts/make_og_image.py            # writes assets/og.png
-    python scripts/make_og_image.py --check    # fails if the file is stale
+    python scripts/make_og_image.py --check    # fails if the card no longer
+                                               # matches what the page claims
 
 Pillow is the only dependency and is not needed to build or serve the site --
 the card is committed, so a reader never regenerates it.
@@ -14,7 +19,7 @@ the card is committed, so a reader never regenerates it.
 
 from __future__ import annotations
 
-import hashlib
+import re
 import sys
 from pathlib import Path
 
@@ -131,22 +136,66 @@ def render() -> Image.Image:
     return img
 
 
+def page_projects(index: Path) -> list[str]:
+    """The projects the front page leads with, in the order it lists them."""
+    html = index.read_text(encoding="utf-8")
+    start = html.find('id="projects"')
+    end = html.find("</section>", start)
+    section = html[start:end] if start >= 0 else ""
+    return re.findall(
+        r'<h3><a href="https://github\.com/DrobyshevDev/([\w.-]+)"', section)
+
+
+def check(out: Path) -> int:
+    """Is the committed card still telling the truth?
+
+    Deliberately not a byte comparison against a fresh render. The card is
+    drawn with whatever fonts the machine has, and a CI runner has neither
+    Georgia nor Calibri -- so identical bytes would need the fonts vendored
+    into the repository, which their licences do not allow.
+
+    What actually goes stale is the project list: someone adds a project to the
+    page and the preview keeps advertising the old set. That is what this
+    checks, plus that the file exists and has the dimensions every platform
+    crops to.
+    """
+    problems = []
+    root = out.parent.parent
+
+    if not out.exists():
+        print(f"FAIL - {out.name} is missing; run scripts/make_og_image.py")
+        return 1
+
+    with Image.open(out) as img:
+        if img.size != (W, H):
+            problems.append(f"{out.name} is {img.size[0]}x{img.size[1]}, expected {W}x{H}")
+
+    icon = out.parent / "apple-touch-icon.png"
+    if not icon.exists():
+        problems.append(f"{icon.name} is missing; run scripts/make_og_image.py")
+
+    listed = page_projects(root / "index.html")
+    if not listed:
+        problems.append("could not read the project list out of index.html; has the markup changed?")
+    elif listed != PROJECTS:
+        problems.append(
+            f"the card names {PROJECTS} but the page leads with {listed}; "
+            f"update PROJECTS in this script and re-run it")
+
+    if problems:
+        print("FAIL - " + "\n       ".join(problems))
+        return 1
+    print(f"OK - card is {W}x{H} and names the same projects as the page: {', '.join(PROJECTS)}")
+    return 0
+
+
 def main(argv) -> int:
     out = Path(__file__).resolve().parent.parent / "assets" / "og.png"
-    img = render()
 
     if "--check" in argv:
-        if not out.exists():
-            print(f"FAIL - {out.name} is missing; run scripts/make_og_image.py")
-            return 1
-        fresh = out.with_suffix(".check.png")
-        img.save(fresh, optimize=True)
-        same = hashlib.sha256(out.read_bytes()).digest() == hashlib.sha256(fresh.read_bytes()).digest()
-        fresh.unlink()
-        print("OK - social card matches the generator" if same else
-              "FAIL - assets/og.png is stale; run scripts/make_og_image.py")
-        return 0 if same else 1
+        return check(out)
 
+    img = render()
     img.save(out, optimize=True)
     print(f"wrote {out} ({out.stat().st_size:,} bytes)")
 
