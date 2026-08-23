@@ -1,10 +1,31 @@
 /* DrobyshevDev — site behaviour. Progressive enhancement only:
-   every section is readable and every link works with this file removed.
-
-   There is no theme code here any more. The site commits to one scheme, so
-   there is nothing to toggle and nothing to remember between visits. */
+   every section is readable and every link works with this file removed. */
 (function () {
   "use strict";
+
+  /* --- Theme ------------------------------------------------------------ */
+  // The stored value is applied by an inline script in <head> so the page never
+  // paints in the wrong theme; this only handles the toggle itself. With
+  // nothing stored the system preference decides, which is why the toggle
+  // reads the media query rather than assuming light.
+  var root = document.documentElement;
+
+  function currentTheme() {
+    var explicit = root.getAttribute("data-theme");
+    if (explicit === "dark" || explicit === "light") return explicit;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  var toggle = document.querySelector(".theme-toggle");
+  if (toggle) {
+    toggle.setAttribute("aria-label", toggle.getAttribute("data-label-" + currentTheme()));
+    toggle.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) { /* private mode */ }
+      toggle.setAttribute("aria-label", toggle.getAttribute("data-label-" + next));
+    });
+  }
 
   /* --- Mobile navigation ------------------------------------------------ */
   var navToggle = document.querySelector(".nav-toggle");
@@ -34,34 +55,6 @@
       if (window.innerWidth > 760) closeNav();
     });
   }
-
-  /* --- Copy buttons ----------------------------------------------------- */
-  // The command text lives in data-copy rather than being scraped from the
-  // DOM, so the prompt characters ($, #) are never copied with it.
-  document.querySelectorAll("[data-copy]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var text = btn.getAttribute("data-copy");
-      var done = function () {
-        btn.setAttribute("data-copied", "true");
-        setTimeout(function () { btn.removeAttribute("data-copied"); }, 1600);
-      };
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(done, fallback);
-      } else {
-        fallback();
-      }
-      function fallback() {
-        var ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly", "");
-        ta.style.cssText = "position:absolute;left:-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand("copy"); done(); } catch (e) { /* nothing to do */ }
-        document.body.removeChild(ta);
-      }
-    });
-  });
 
   /* --- Current year ----------------------------------------------------- */
   document.querySelectorAll("[data-year]").forEach(function (el) {

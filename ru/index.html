@@ -9,7 +9,8 @@
 <link rel="alternate" hreflang="en" href="https://drobyshevdev.github.io/">
 <link rel="alternate" hreflang="ru" href="https://drobyshevdev.github.io/ru/">
 <link rel="alternate" hreflang="x-default" href="https://drobyshevdev.github.io/">
-<meta name="theme-color" content="#08080a">
+<meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131316" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DrobyshevDev">
@@ -29,6 +30,14 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 
+<script>
+  // Применяется до первой отрисовки, чтобы страница не мигала чужой темой.
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,7 +49,7 @@
       "url": "https://drobyshevdev.github.io/",
       "logo": "https://drobyshevdev.github.io/assets/mark.svg",
       "image": "https://drobyshevdev.github.io/assets/og.png",
-      "description": "Открытые фреймворки и инструменты для машинного обучения, LLM-агентов и систем принятия операционных решений.",
+      "description": "Открытые фреймворки и инструменты для машинного обучения, LLM-агентов и систем операционных решений.",
       "sameAs": ["https://github.com/DrobyshevDev"],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -52,7 +61,7 @@
     {
       "@type": "SoftwareSourceCode",
       "name": "praxis",
-      "description": "A legal assistant for Russian law that answers with the provisions it rests on, every citation verified by an NLI model.",
+      "description": "Юридический ассистент по российскому праву: отвечает нормами, на которых стоит ответ, и каждую цитату проверяет NLI-модель.",
       "codeRepository": "https://github.com/DrobyshevDev/praxis",
       "programmingLanguage": "Python",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
@@ -61,7 +70,7 @@
     {
       "@type": "SoftwareSourceCode",
       "name": "mlango",
-      "description": "A batteries-included framework for machine learning, analytics and LLM agents, built on Django's philosophy.",
+      "description": "Фреймворк для машинного обучения, аналитики и LLM-агентов, построенный на философии Django.",
       "codeRepository": "https://github.com/DrobyshevDev/mlango",
       "programmingLanguage": "Python",
       "license": "https://opensource.org/licenses/MIT",
@@ -70,7 +79,7 @@
     {
       "@type": "SoftwareSourceCode",
       "name": "glia",
-      "description": "A glass-box, minimal library for building LLM agents: modern techniques as opt-in primitives, no hidden control flow.",
+      "description": "Прозрачная минимальная библиотека для LLM-агентов: современные приёмы как подключаемые примитивы, без скрытого потока управления.",
       "codeRepository": "https://github.com/DrobyshevDev/glia",
       "programmingLanguage": "Python",
       "license": "https://opensource.org/licenses/MIT",
@@ -79,7 +88,7 @@
     {
       "@type": "SoftwareSourceCode",
       "name": "decisionrl",
-      "description": "Reinforcement learning for operational decisions, each applied environment shipped with its classical operations-research baseline.",
+      "description": "Обучение с подкреплением для операционных решений: каждая прикладная среда идёт вместе с классической базовой линией из исследования операций.",
       "codeRepository": "https://github.com/DrobyshevDev/decisionrl",
       "programmingLanguage": "Python",
       "license": "https://opensource.org/licenses/MIT",
@@ -88,7 +97,7 @@
     {
       "@type": "SoftwareSourceCode",
       "name": "stadion",
-      "description": "A proving ground for operational decisions: agents scored against the tuned classical method and the exact optimum, with a confidence interval.",
+      "description": "Полигон для операционных решений: агент оценивается против настроенного классического метода и точного оптимума, с доверительным интервалом.",
       "codeRepository": "https://github.com/DrobyshevDev/stadion",
       "programmingLanguage": "Python",
       "license": "https://opensource.org/licenses/MIT",
@@ -97,7 +106,7 @@
     {
       "@type": "Course",
       "name": "lemma",
-      "description": "A free course covering machine learning, neural networks, reinforcement learning and recommender systems, from zero to reading and reproducing research.",
+      "description": "Бесплатный курс по машинному обучению, нейросетям, обучению с подкреплением и рекомендательным системам — с нуля до чтения и воспроизведения исследований.",
       "url": "https://drobyshevdev.github.io/lemma/",
       "inLanguage": "ru",
       "isAccessibleForFree": true,
@@ -113,20 +122,28 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/ru/">
-      <img class="mark" src="/assets/mark.svg" alt="" width="22" height="22">
+      <img class="mark" src="/assets/mark.svg" alt="" width="24" height="24">
       DrobyshevDev
     </a>
 
     <nav class="nav" id="primary-nav" aria-label="Основная навигация">
       <a href="#projects">Проекты</a>
-      <a href="#reading">Курс</a>
+      <a href="#stack">Стек</a>
+      <a href="#evidence">Замеры</a>
+      <a href="#notes">Разборы</a>
       <a href="#method">Метод</a>
-      <a href="#licensing">Лицензии</a>
       <a href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a>
     </nav>
 
     <div class="nav-tools">
       <a class="lang-switch" href="/" hreflang="en" lang="en">EN</a>
+      <button class="icon-btn theme-toggle" type="button"
+              data-label-dark="Переключить на светлую тему"
+              data-label-light="Переключить на тёмную тему"
+              aria-label="Переключить тему оформления">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
       <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Открыть меню">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -139,7 +156,7 @@
   <!-- ==================== Первый экран ==================== -->
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow"><span class="rule"></span> Открытый код · Python · MIT и Apache-2.0</p>
+      <p class="eyebrow">Открытый код · Python · MIT и Apache-2.0</p>
 
       <h1>Фреймворки и инструменты для машинного обучения, LLM-агентов и операционных решений.</h1>
 
@@ -149,7 +166,7 @@
       </p>
 
       <div class="actions">
-        <a class="btn btn-primary" href="#projects">
+        <a class="btn btn-bright" href="#projects">
           Смотреть проекты
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -159,24 +176,7 @@
         </a>
       </div>
 
-      <dl class="spec-strip">
-        <div>
-          <dt>Алгоритмов</dt>
-          <dd>31<span class="sub">В decisionrl, на 22 средах — девять из них прикладные, а не синтетические.</span></dd>
-        </div>
-        <div>
-          <dt>Обязательных зависимостей</dt>
-          <dd>0<span class="sub">Ядро glia не импортирует ничего вне стандартной библиотеки. Провайдеры и расширения подключаются явно.</span></dd>
-        </div>
-        <div>
-          <dt>Покрытие строк</dt>
-          <dd>86%<span class="sub">decisionrl, замер pytest-cov в CI. Ниже порога сборка падает, а не сообщает цифру.</span></dd>
-        </div>
-        <div>
-          <dt>Платформы в CI</dt>
-          <dd>3<span class="sub">Linux, macOS и Windows на каждый push. Утверждение «работает на Windows» — это то, что кто-то проверил.</span></dd>
-        </div>
-      </dl>
+      <p class="hero-since"><span class="dot"></span> Пять библиотек, бесплатный курс и открытые разборы. С 2026 года.</p>
     </div>
   </section>
 
@@ -184,299 +184,310 @@
   <section class="band" id="projects">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow"><span class="rule"></span> Проекты</p>
-        <h2>Пять систем, один инженерный стандарт</h2>
+        <p class="eyebrow">Проекты</p>
+        <h2>Что мы делаем</h2>
         <p class="lead">
-          Каждая ставится сегодня, документирована и выпущена под разрешительной лицензией. Цифры
+          Каждый ставится сегодня, документирован и выпущен под разрешительной лицензией. Цифры
           рядом с проектом получены скриптом из того же репозитория.
         </p>
       </div>
 
-      <!-- praxis -->
-      <article class="project">
-        <div>
-          <div class="project-name">
+      <div class="cards">
+
+        <article class="card">
+          <div class="card-top">
             <h3><a href="https://github.com/DrobyshevDev/praxis" rel="noopener">praxis</a></h3>
-            <span class="licence">Apache-2.0</span>
+            <span class="tag">Apache-2.0</span>
           </div>
-          <p class="claim">Юридический ассистент, цитаты которого проверены, а не заявлены.</p>
           <p>
-            Отвечает на вопрос по российскому праву и возвращает нормы, на которых стоит ответ.
-            Поиск гибридный — лексический плюс плотный, с переранжированием кросс-энкодером, — а
-            NLI-модель проверяет, что процитированная норма действительно подтверждает утверждение:
-            правдоподобная, но неверная ссылка отсекается, а не уходит пользователю. Ответ по
-            умолчанию экстрактивный, дословный текст закона, и галлюцинировать не может.
+            Юридический ассистент, цитаты которого проверены, а не заявлены. Гибридный поиск с
+            переранжированием кросс-энкодером и NLI-модель, которая сверяет, что норма подтверждает
+            утверждение. Ответ по умолчанию — текст закона, галлюцинировать он не может.
           </p>
-          <div class="project-links">
-            <a href="https://drobyshevdev.github.io/praxis/" rel="noopener">Документация</a>
-            <a href="https://github.com/DrobyshevDev/praxis" rel="noopener">Репозиторий</a>
-            <a href="https://github.com/DrobyshevDev/praxis/blob/master/ARCHITECTURE.md" rel="noopener">Архитектура</a>
+          <div class="command"><span class="p">$ </span>docker compose up app</div>
+          <div class="card-foot">
+            <a class="more" href="https://drobyshevdev.github.io/praxis/" rel="noopener">Документация
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="more" href="https://github.com/DrobyshevDev/praxis" rel="noopener">Репозиторий
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
-        </div>
+        </article>
 
-        <div>
-          <dl class="datasheet">
-            <div><dt>Последний релиз</dt><dd>v0.1.0</dd></div>
-            <div><dt>recall@5</dt><dd>0.92</dd></div>
-            <div><dt>MRR</dt><dd>0.94</dd></div>
-            <div><dt>Запуск</dt><dd>Python 3.12 · Docker</dd></div>
-          </dl>
-          <div class="command">
-            <button class="copy-btn" type="button" data-copy="docker compose up app" aria-label="Скопировать команду">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-            </button>
-            <div><span class="p">$ </span>docker compose up app</div>
-            <div class="c"># localhost:8077, без ключей</div>
-          </div>
-          <p class="note" style="margin-top:14px">
-            Качество поиска замерено на золотом наборе по полному корпусу и отслеживается от запуска
-            к запуску.
-          </p>
-        </div>
-      </article>
-
-      <!-- mlango -->
-      <article class="project">
-        <div>
-          <div class="project-name">
+        <article class="card">
+          <div class="card-top">
             <h3><a href="https://github.com/DrobyshevDev/mlango" rel="noopener">mlango</a></h3>
-            <span class="licence">MIT</span>
+            <span class="tag">MIT</span>
           </div>
-          <p class="claim">Философия Django, применённая к машинному обучению.</p>
           <p>
-            Вы объявляете датасеты, модели, агентов и оценки; фреймворк их запускает, версионирует,
-            записывает и показывает вам. Одно тело класса становится страницей админки,
-            документированным эндпоинтом, миграцией и целью в CLI одновременно. Агенты стоят рядом с
-            моделями как равное семейство: одно хранилище метаданных, одна админка, одна система
-            оценки.
+            Философия Django, применённая к машинному обучению. Вы объявляете датасеты, модели,
+            агентов и оценки; одно тело класса становится страницей админки, документированным
+            эндпоинтом, миграцией и целью в CLI одновременно.
           </p>
-          <div class="project-links">
-            <a href="https://drobyshevdev.github.io/mlango/" rel="noopener">Документация</a>
-            <a href="https://pypi.org/project/mlango/" rel="noopener">PyPI</a>
-            <a href="https://github.com/DrobyshevDev/mlango" rel="noopener">Репозиторий</a>
+          <div class="command"><span class="p">$ </span>pip install "mlango[sklearn]"</div>
+          <div class="card-foot">
+            <a class="more" href="https://drobyshevdev.github.io/mlango/" rel="noopener">Документация
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="more" href="https://pypi.org/project/mlango/" rel="noopener">PyPI
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
-        </div>
+        </article>
 
-        <div>
-          <dl class="datasheet">
-            <div><dt>Последний релиз</dt><dd>v0.2.0</dd></div>
-            <div><dt>Требуется</dt><dd>Python ≥ 3.10</dd></div>
-            <div><dt>Декларативных семейств</dt><dd>4</dd></div>
-            <div><dt>Матрица CI</dt><dd>4 версии · 3 платформы</dd></div>
-          </dl>
-          <div class="command">
-            <button class="copy-btn" type="button" data-copy="pip install &quot;mlango[sklearn]&quot;" aria-label="Скопировать команду">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-            </button>
-            <div><span class="p">$ </span>pip install <span class="s">"mlango[sklearn]"</span></div>
-            <div><span class="p">$ </span>mlango startproject myproject</div>
-          </div>
-        </div>
-      </article>
-
-      <!-- glia -->
-      <article class="project">
-        <div>
-          <div class="project-name">
+        <article class="card">
+          <div class="card-top">
             <h3><a href="https://github.com/DrobyshevDev/glia" rel="noopener">glia</a></h3>
-            <span class="licence">MIT</span>
+            <span class="tag">MIT</span>
           </div>
-          <p class="claim">Агентный цикл, который читается за один вечер.</p>
           <p>
-            Каждый вызов модели, вызов инструмента и переход состояния — обычный объект, который
-            можно записать, снять снимком и воспроизвести. Современные приёмы — инструменты,
-            структурированные ответы, компактизация контекста, устойчивые чекпоинты, ограничители,
-            подагенты, оценки как тесты — поставляются подключаемыми примитивами, которые читаются,
-            а не монолитом, которому надо доверять. Нужен графовый движок — берите LangGraph. Нужен
-            маленький прозрачный цикл, который вы понимаете целиком, — берите это.
+            Агентный цикл, который читается за один вечер. Каждый вызов модели, вызов инструмента и
+            переход состояния — обычный объект, который можно записать, снять снимком и
+            воспроизвести. Ядро не импортирует ничего вне стандартной библиотеки.
           </p>
-          <div class="project-links">
-            <a href="https://drobyshevdev.github.io/glia/" rel="noopener">Документация</a>
-            <a href="https://pypi.org/project/glia-agents/" rel="noopener">PyPI</a>
-            <a href="https://github.com/DrobyshevDev/glia" rel="noopener">Репозиторий</a>
+          <div class="command"><span class="p">$ </span>pip install glia-agents</div>
+          <div class="card-foot">
+            <a class="more" href="https://drobyshevdev.github.io/glia/" rel="noopener">Документация
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="more" href="https://pypi.org/project/glia-agents/" rel="noopener">PyPI
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
-        </div>
+        </article>
 
-        <div>
-          <dl class="datasheet">
-            <div><dt>Последний релиз</dt><dd>v0.8.2</dd></div>
-            <div><dt>Требуется</dt><dd>Python ≥ 3.10</dd></div>
-            <div><dt>Зависимостей ядра</dt><dd>0</dd></div>
-            <div><dt>Порог покрытия</dt><dd>90%</dd></div>
-          </dl>
-          <div class="command">
-            <button class="copy-btn" type="button" data-copy="pip install glia-agents" aria-label="Скопировать команду">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-            </button>
-            <div><span class="p">$ </span>pip install glia-agents</div>
-            <div class="c"># ядру больше ничего не нужно</div>
-          </div>
-        </div>
-      </article>
-
-      <!-- decisionrl -->
-      <article class="project">
-        <div>
-          <div class="project-name">
+        <article class="card">
+          <div class="card-top">
             <h3><a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">decisionrl</a></h3>
-            <span class="licence">MIT</span>
+            <span class="tag">MIT</span>
           </div>
-          <p class="claim">Обучение с подкреплением для решений, у которых есть функция издержек.</p>
           <p>
-            Ценообразование, запасы, энергетика, очереди и цепочки поставок: решения, которые бизнес
-            принимает тысячи раз в день, где небольшое улучшение политики накапливается. Каждая
-            прикладная среда идёт вместе с классической базовой линией из исследования операций,
-            поэтому выученная политика измеряется против стандартного метода. Там, где классический
-            метод уже оптимален, документация говорит об этом и показывает, как выученная политика
-            его повторяет.
+            Обучение с подкреплением для решений, у которых есть функция издержек: цены, запасы,
+            энергетика, очереди, цепочки поставок. Каждая прикладная среда идёт вместе с
+            классической базовой линией из исследования операций.
           </p>
-          <div class="project-links">
-            <a href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">Документация</a>
-            <a href="https://pypi.org/project/decisionrl/" rel="noopener">PyPI</a>
-            <a href="https://github.com/DrobyshevDev/decisionrl" rel="noopener">Репозиторий</a>
+          <div class="command"><span class="p">$ </span>pip install decisionrl</div>
+          <div class="card-foot">
+            <a class="more" href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">Документация
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="more" href="https://pypi.org/project/decisionrl/" rel="noopener">PyPI
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
-        </div>
+        </article>
 
-        <div>
-          <dl class="datasheet">
-            <div><dt>Последний релиз</dt><dd>v0.4.0</dd></div>
-            <div><dt>Алгоритмов</dt><dd>31</dd></div>
-            <div><dt>Сред</dt><dd>22 · 9 прикладных</dd></div>
-            <div><dt>Покрытие строк</dt><dd>86%</dd></div>
-          </dl>
-          <div class="command">
-            <button class="copy-btn" type="button" data-copy="pip install decisionrl" aria-label="Скопировать команду">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-            </button>
-            <div><span class="p">$ </span>pip install decisionrl</div>
-            <div class="c"># или "decisionrl[gym]"</div>
-          </div>
-          <p class="note" style="margin-top:14px">
-            Ночная задача переобучает прикладные задачи на нескольких сидах, поэтому цифра в
-            документации падает сразу, как перестаёт быть правдой.
-          </p>
-        </div>
-      </article>
-
-      <!-- stadion -->
-      <article class="project">
-        <div>
-          <div class="project-name">
+        <article class="card">
+          <div class="card-top">
             <h3><a href="https://github.com/DrobyshevDev/stadion" rel="noopener">stadion</a></h3>
-            <span class="licence">MIT</span>
-          </div>
-          <p class="claim">Полигон, где агент оценивается против точного оптимума.</p>
-          <p>
-            Задачи операционных решений с двумя опорными плечами рядом с каждым агентом: настроенный
-            классический метод и оптимум, посчитанный динамическим программированием. Результат
-            выдаётся с доверительным интервалом и ставится на эту шкалу, поэтому «лучше» означает
-            расстояние до достижимого предела, а не позицию в таблице лидеров.
-          </p>
-
-          <div class="measure">
-            <table>
-              <caption>Запас между настроенным классическим методом и посчитанным оптимумом, с 95% бутстрап-интервалом на парной разности.</caption>
-              <thead>
-                <tr><th>Задача</th><th>Запас</th><th>95% интервал</th></tr>
-              </thead>
-              <tbody>
-              <tr><td><code>inventory</code></td><td>+0.4%</td><td>[+0.561, +1.031]</td></tr>
-              <tr><td><code>joint-pricing</code></td><td>+4.3%</td><td>[+3.794, +5.656]</td></tr>
-              <tr><td><code>pricing</code></td><td>+6.2%</td><td>[+1.265, +1.761]</td></tr>
-              <tr><td><code>queueing</code></td><td>+16.9%</td><td>[+3.418, +3.988]</td></tr>
-              <tr><td><code>supply-chain</code></td><td>+17.3%</td><td>[+5.505, +7.493]</td></tr>
-              <tr><td><code>energy</code></td><td>+26.6%</td><td>[+4.221, +4.690]</td></tr>
-              </tbody>
-            </table>
+            <span class="tag">MIT</span>
           </div>
           <p>
-            Разброс здесь и есть содержание. Там, где учебный ответ уже почти оптимален,
-            выигрывать нечего; там, где он не умеет планировать вперёд, на столе остаётся
-            четверть ценности. Бенчмарк, у которого все задачи оставляют щедрый запас,
-            отобран под проблемы, на которых стандартный метод плох.
+            Полигон, где агент оценивается против точного оптимума. Шесть операционных решений, у
+            каждого рядом настроенный классический метод и посчитанный оптимум, а на разности —
+            бутстрап-интервал.
           </p>
-          <div class="project-links">
-            <a href="https://github.com/DrobyshevDev/stadion" rel="noopener">Репозиторий</a>
-            <a href="https://pypi.org/project/stadion-rl/" rel="noopener">PyPI</a>
+          <div class="command"><span class="p">$ </span>pip install stadion-rl</div>
+          <div class="card-foot">
+            <a class="more" href="#evidence">Замеры
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="more" href="https://github.com/DrobyshevDev/stadion" rel="noopener">Репозиторий
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
-        </div>
+        </article>
 
-        <div>
-          <dl class="datasheet">
-            <div><dt>Последний релиз</dt><dd>v0.1.0</dd></div>
-            <div><dt>Дистрибутив</dt><dd>stadion-rl</dd></div>
-            <div><dt>Опорных плеч</dt><dd>2 на задачу</dd></div>
-            <div><dt>Матрица CI</dt><dd>4 версии · 3 платформы</dd></div>
-          </dl>
-          <div class="command">
-            <button class="copy-btn" type="button" data-copy="pip install stadion-rl" aria-label="Скопировать команду">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-            </button>
-            <div><span class="p">$ </span>pip install stadion-rl</div>
-            <div class="c"># оптимум считается, а не предполагается</div>
-          </div>
-        </div>
-      </article>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== Курс и исследования ==================== -->
-  <section class="band band-2" id="reading">
+  <!-- ==================== Стек ==================== -->
+  <section class="band band-2" id="stack">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow"><span class="rule"></span> Курс и исследования</p>
-        <h2>Написано так, чтобы это можно было проверить</h2>
+        <p class="eyebrow">Стек</p>
+        <h2>На чём это построено и почему</h2>
+        <p class="lead">
+          Список короткий намеренно. Каждая зависимость — это то, что читателю придётся поставить,
+          изучить и поддерживать, поэтому каждая здесь оправдывает себя больше чем в одном проекте.
+        </p>
       </div>
 
-      <div class="course">
-        <div>
-          <h3 style="margin-bottom:14px">lemma — дорога в ML, DL и RL</h3>
-          <p>
-            Двадцать семь модулей: от арифметики среднего до воспроизведения свежей статьи. Без
-            регистрации, без «первый модуль бесплатно», без рассрочек. Центральный навык — проверить
-            утверждение, а не запустить обучение, поэтому модуль первый про базовые линии и
-            доверительные интервалы, ещё до всякого машинного обучения. Ноутбуки считаются на CPU за
-            секунды и выполняются в CI на Linux и Windows, потому что у читателя, у которого ноутбук
-            не запустился, нет курса.
-          </p>
-          <div class="actions">
-            <a class="btn btn-primary" href="https://drobyshevdev.github.io/lemma/" rel="noopener">Открыть курс</a>
-            <a class="btn btn-secondary" href="https://github.com/DrobyshevDev/lemma" rel="noopener">Репозиторий</a>
-          </div>
+      <div class="cards">
 
-          <h3 style="margin:56px 0 14px">research — открытые разборы статей</h3>
+        <article class="card">
+          <div class="card-top"><h3>Python</h3><span class="tag">3.9 – 3.13</span></div>
           <p>
-            Разборы по машинному обучению, обучению с подкреплением, нейронаукам и методам проверки
-            утверждений. Статья сообщает, что она нашла; разбор пишет, что она показала — это
-            меньше, — и отмечает расстояние между первым и вторым. Каждый разбор объявляет
-            источники, и CI отклоняет тот, который этого не делает.
+            Типизировано насквозь, проверяется mypy и ruff в CI. Нижние границы версий говорят, с
+            чем читатель может прийти, а не на чём гоняется CI: поднять их — значит закрыть дверь,
+            ничего при этом не проверив.
           </p>
-          <div class="actions">
-            <a class="btn btn-secondary" href="https://drobyshevdev.github.io/research/" rel="noopener">Читать разборы</a>
-          </div>
-        </div>
+        </article>
 
-        <div>
-          <dl class="datasheet">
-            <div><dt>lemma · модулей</dt><dd>27</dd></div>
-            <div><dt>lemma · язык</dt><dd>русский</dd></div>
-            <div><dt>lemma · лицензия</dt><dd>CC BY 4.0 · MIT</dd></div>
-            <div><dt>research · лицензия</dt><dd>CC BY 4.0 · MIT</dd></div>
-            <div><dt>Цена</dt><dd>бесплатно</dd></div>
-          </dl>
-          <p class="note" style="margin-top:14px">
-            Текст под CC BY 4.0, код под MIT. Единственное условие — указать авторство.
+        <article class="card">
+          <div class="card-top"><h3>PyTorch</h3><span class="tag">decisionrl</span></div>
+          <p>
+            Все алгоритмы decisionrl. Целевая платформа по умолчанию — CPU: прикладные среды
+            достаточно малы, чтобы читатель без GPU воспроизвёл цифры из документации. Ради этого
+            их и публикуют.
           </p>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><h3>FastAPI · Postgres · pgvector</h3><span class="tag">praxis</span></div>
+          <p>
+            Одно API-ядро обслуживает всех клиентов. pgvector держит плотный индекс в той же базе,
+            что и корпус: нет второй системы, которую надо синхронизировать, и отдельной истории с
+            бэкапами для той части, что делает ответы.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><h3>Docker</h3><span class="tag">praxis</span></div>
+          <p>
+            Образ ставит extra <code>api</code>, поднимает офлайн-режим и несёт корпус внутри, так
+            что <code>docker compose up app</code> работает без ключей, GPU и обращений наружу.
+            Читатель, который не смог запустить, ничего проверить не сможет.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><h3>GitHub Actions</h3><span class="tag">везде</span></div>
+          <p>
+            Linux, macOS и Windows на каждый push, с одной агрегирующей проверкой для защиты ветки.
+            Релизы публикуются через Trusted Publishing, а десктопные бинарники несут подписанную
+            аттестацию происхождения.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-top"><h3>MkDocs</h3><span class="tag">документация</span></div>
+          <p>
+            Сборка с <code>--strict</code>, которая падает на сломанной внутренней ссылке или
+            странице вне навигации. Ни веб-шрифтов, ни аналитики ни на одном из сайтов, включая
+            этот.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Замеры ==================== -->
+  <section class="band band-bright" id="evidence">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Замеры</p>
+        <h2>Цифры с условиями, при которых они получены</h2>
+        <p class="lead">
+          Здесь нет логотипов клиентов и нет кейсов. Открытая организация может показать вместо них
+          свои замеры и команды, которыми они воспроизводятся.
+        </p>
+      </div>
+
+      <div class="measure">
+        <table>
+          <caption>
+            Запас между настроенным классическим методом и посчитанным оптимумом в stadion, с 95%
+            бутстрап-интервалом на парной разности. Замер на 40 инстансах × 20 эпизодов;
+            воспроизводится командой <code>stadion run &lt;task&gt; --agent classical --instances 40 --episodes 20</code>.
+          </caption>
+          <thead>
+            <tr><th>Задача</th><th>Запас</th><th>95% интервал</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>inventory</code></td><td>+0.4%</td><td>[+0.561, +1.031]</td></tr>
+            <tr><td><code>joint-pricing</code></td><td>+4.3%</td><td>[+3.794, +5.656]</td></tr>
+            <tr><td><code>pricing</code></td><td>+6.2%</td><td>[+1.265, +1.761]</td></tr>
+            <tr><td><code>queueing</code></td><td>+16.9%</td><td>[+3.418, +3.988]</td></tr>
+            <tr><td><code>supply-chain</code></td><td>+17.3%</td><td>[+5.505, +7.493]</td></tr>
+            <tr><td><code>energy</code></td><td>+26.6%</td><td>[+4.221, +4.690]</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lead" style="margin-top:28px">
+        Разброс здесь и есть содержание. Там, где учебный ответ уже почти оптимален, выигрывать
+        нечего; там, где он не умеет планировать вперёд, на столе остаётся четверть ценности.
+        Бенчмарк, у которого все задачи оставляют щедрый запас, отобран под проблемы, на которых
+        стандартный метод плох.
+      </p>
+
+      <dl class="figures">
+        <div class="figure">
+          <dt>Алгоритмов</dt>
+          <dd>31<span class="sub">В decisionrl, на 22 средах — девять из них прикладные, а не синтетические.</span></dd>
         </div>
+        <div class="figure">
+          <dt>Обязательных зависимостей</dt>
+          <dd>0<span class="sub">Ядро glia не импортирует ничего вне стандартной библиотеки. Провайдеры и расширения подключаются явно.</span></dd>
+        </div>
+        <div class="figure">
+          <dt>Покрытие строк</dt>
+          <dd>86%<span class="sub">decisionrl, замер pytest-cov в CI. Ниже порога сборка падает, а не сообщает цифру.</span></dd>
+        </div>
+        <div class="figure">
+          <dt>Поиск, recall@5</dt>
+          <dd>0.92<span class="sub">praxis, на золотом наборе по полному корпусу, отслеживается от запуска к запуску. MRR 0.94.</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ==================== Разборы ==================== -->
+  <section class="band" id="notes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Разборы и обучение</p>
+        <h2>Написано так, чтобы это можно было проверить</h2>
+        <p class="lead">
+          Статья сообщает, что она нашла. Разбор пишет, что она показала — это меньше, — и отмечает
+          расстояние между первым и вторым.
+        </p>
+      </div>
+
+      <div class="feed">
+
+        <article class="card">
+          <p class="meta"><time datetime="2026-08-10">10 августа 2026</time><span class="sep">·</span>research<span class="sep">·</span>draft</p>
+          <h3><a href="https://drobyshevdev.github.io/research/ru/notes/dopamine-reward-prediction-error/" rel="noopener">Дофаминовые нейроны и ошибка предсказания награды</a></h3>
+          <p>
+            Дофаминовые нейроны среднего мозга разряжаются по схеме, похожей на ошибку временных
+            разностей. Настолько похожей, что алгоритм 1988 года предсказал, что электрод запишет в
+            1997-м, — поэтому результат и переоценивают.
+          </p>
+          <div class="chips"><span class="chip">neuroscience</span><span class="chip">reinforcement-learning</span><span class="chip">dopamine</span></div>
+        </article>
+
+        <article class="card">
+          <p class="meta"><span>Открытое собрание</span><span class="sep">·</span>CC BY 4.0</p>
+          <h3><a href="https://drobyshevdev.github.io/research/ru/" rel="noopener">research — открытые разборы статей</a></h3>
+          <p>
+            Машинное обучение, обучение с подкреплением, нейронауки и методы проверки утверждений.
+            Каждый разбор объявляет источники, и CI отклоняет тот, который этого не делает.
+          </p>
+          <div class="card-foot" style="margin-top:16px">
+            <a class="more" href="https://drobyshevdev.github.io/research/ru/" rel="noopener">Читать разборы
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="meta"><span>Бесплатный курс</span><span class="sep">·</span>27 модулей<span class="sep">·</span>русский</p>
+          <h3><a href="https://drobyshevdev.github.io/lemma/" rel="noopener">lemma — дорога в ML, DL и RL</a></h3>
+          <p>
+            От арифметики среднего до воспроизведения свежей статьи. Без регистрации и без «первый
+            модуль бесплатно». Модуль первый — про базовые линии и доверительные интервалы, ещё до
+            всякого машинного обучения: центральный навык здесь — проверить утверждение, а не
+            запустить обучение.
+          </p>
+          <div class="card-foot" style="margin-top:16px">
+            <a class="more" href="https://drobyshevdev.github.io/lemma/" rel="noopener">Открыть курс
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
   <!-- ==================== Метод ==================== -->
-  <section class="band" id="method">
+  <section class="band band-dark" id="method">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow"><span class="rule"></span> Метод</p>
+        <p class="eyebrow">Метод</p>
         <h2>Пять правил, которым подчиняется каждый репозиторий</h2>
         <p class="lead">
           Это критерии ревью, а не пожелания. Pull request, который нарушает одно из них, получает
@@ -489,8 +500,9 @@
           <span class="num">01</span>
           <h3>Ошибки учат</h3>
           <p>
-            Сообщение читают в худший возможный момент и без открытого исходника. Оно должно сказать,
-            что пошло не так и что делать дальше, и перечислить альтернативы, когда они есть.
+            Сообщение читают в худший возможный момент и без открытого исходника. Оно должно
+            сказать, что пошло не так и что делать дальше, и перечислить альтернативы, когда они
+            есть.
           </p>
         </div>
         <div class="rule">
@@ -505,10 +517,9 @@
           <span class="num">03</span>
           <h3>Проверка важнее утверждения</h3>
           <p>
-            Зелёный пайплайн на одной машине — не доказательство. Каждое публикуемое утверждение —
-            точность, бенчмарк, «это работает на Windows» — измеряется на том запуске, который
-            описывает, а цифры в README закреплены тестами, потому что проза тихо портится, а
-            падающий тест — нет.
+            Зелёный пайплайн на одной машине — не доказательство. Каждое публикуемое утверждение
+            измеряется на том запуске, который описывает, а цифры в README закреплены тестами,
+            потому что проза тихо портится, а падающий тест — нет.
           </p>
         </div>
         <div class="rule">
@@ -531,38 +542,34 @@
     </div>
   </section>
 
-  <!-- ==================== Лицензии и участие ==================== -->
-  <section class="band band-2" id="licensing">
+  <!-- ==================== Условия ==================== -->
+  <section class="band" id="licensing">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow"><span class="rule"></span> Лицензии и участие</p>
+        <p class="eyebrow">Работа вместе</p>
         <h2>Условия, в одном месте</h2>
       </div>
 
       <dl class="rows">
         <div>
-          <dt>Коммерческие вопросы</dt>
-          <dd>Интеграция, нужная вашей команде фича в апстриме или работа над смежной задачей — <a href="mailto:denidrob138@gmail.com?subject=DrobyshevDev%20—%20запрос">denidrob138@gmail.com</a>. Напишите, что строите и что мешает; для первого ответа этого достаточно.</dd>
-        </div>
-        <div>
           <dt>Лицензии</dt>
           <dd>mlango, glia, decisionrl и stadion — MIT. praxis — Apache-2.0. Текст курса и разборов — CC BY 4.0, код в них — MIT. Коммерческое использование разрешено всеми.</dd>
         </div>
         <div>
+          <dt>Коммерческие запросы</dt>
+          <dd>Интеграция, нужная вашей команде функция в апстриме или работа над смежным — <a href="mailto:denidrob138@gmail.com?subject=DrobyshevDev%20—%20enquiry">denidrob138@gmail.com</a>. Напишите, что вы строите и что мешает; для первого ответа этого достаточно.</dd>
+        </div>
+        <div>
           <dt>Участие</dt>
-          <dd>Откройте issue с описанием изменения, затем pull request в ветку по умолчанию. В каждом репозитории есть <code>CONTRIBUTING.md</code> — свой или общий для организации — с проверками, которые запустит CI, поэтому неписаных правил, которые обнаруживаются постфактум, нет.</dd>
+          <dd>Откройте issue с описанием изменения, затем pull request в ветку по умолчанию. В каждом репозитории есть <code>CONTRIBUTING.md</code> — свой или общий для организации — с проверками, которые запустит CI, поэтому неписаных правил нет.</dd>
         </div>
         <div>
           <dt>Сообщение об уязвимости</dt>
           <dd>Через приватный механизм GitHub в затронутом репозитории. Никогда через публичный issue.</dd>
         </div>
         <div>
-          <dt>Документация</dt>
-          <dd>На английском и русском, устроена так, что третий язык — это один файл на страницу, а не форк.</dd>
-        </div>
-        <div>
           <dt>Кодекс поведения</dt>
-          <dd>Contributor Covenant, общий для организации. Сообщения идут приватно на адрес из профиля организации.</dd>
+          <dd>Contributor Covenant, общий для организации. Сообщения идут приватно на адрес выше.</dd>
         </div>
       </dl>
     </div>
@@ -575,7 +582,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="brand" href="/ru/">
-          <img class="mark" src="/assets/mark.svg" alt="" width="22" height="22">
+          <img class="mark" src="/assets/mark.svg" alt="" width="24" height="24">
           DrobyshevDev
         </a>
         <p>
@@ -603,7 +610,7 @@
           <li><a href="https://drobyshevdev.github.io/glia/" rel="noopener">glia</a></li>
           <li><a href="https://drobyshevdev.github.io/decisionrl/" rel="noopener">decisionrl</a></li>
           <li><a href="https://drobyshevdev.github.io/lemma/" rel="noopener">lemma, курс</a></li>
-          <li><a href="https://drobyshevdev.github.io/research/" rel="noopener">research</a></li>
+          <li><a href="https://drobyshevdev.github.io/research/ru/" rel="noopener">research</a></li>
         </ul>
       </div>
 
@@ -612,7 +619,8 @@
         <ul role="list">
           <li><a href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a></li>
           <li><a href="#method">Метод</a></li>
-          <li><a href="#licensing">Лицензии</a></li>
+          <li><a href="#licensing">Условия</a></li>
+          <li><a href="mailto:denidrob138@gmail.com?subject=DrobyshevDev%20—%20enquiry">Связаться</a></li>
           <li><a href="/" hreflang="en" lang="en">English version</a></li>
           <li><a href="/legal/">Юридическая информация</a></li>
         </ul>
@@ -621,7 +629,7 @@
 
     <div class="footer-bottom">
       <p>© <span data-year>2026</span> DrobyshevDev. Исходный код под MIT и Apache-2.0.</p>
-      <p>Статический сайт. Ни трекеров, ни сторонних запросов — <a href="https://github.com/DrobyshevDev/DrobyshevDev.github.io/blob/main/scripts/check_site.py" rel="noopener">это проверяется в CI</a>, а не заявляется.</p>
+      <p>Статический сайт. Ни трекеров, ни сторонних запросов — <a href="https://github.com/DrobyshevDev/DrobyshevDev.github.io/blob/main/scripts/check_site.py" rel="noopener">проверяется в CI</a>, а не заявляется.</p>
     </div>
   </div>
 </footer>
