@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Юридическая информация — DrobyshevDev</title>
-<meta name="theme-color" content="#08080a">
+<meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131316" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Пользовательское соглашение, политика конфиденциальности и правовая информация сайта организации DrobyshevDev.">
 <link rel="canonical" href="https://drobyshevdev.github.io/legal/">
 
@@ -21,6 +22,14 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 
+<script>
+  // Применяется до первой отрисовки, чтобы страница не мигала чужой темой.
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+
 </head>
 <body>
 <a class="skip-link" href="#main">Перейти к содержимому</a>
@@ -34,7 +43,7 @@
 
     <nav class="nav" id="primary-nav" aria-label="Основная навигация">
       <a href="/ru/#projects">Проекты</a>
-      <a href="/ru/#reading">Курс</a>
+      <a href="/ru/#notes">Курс</a>
       <a href="/ru/#method">Как мы работаем</a>
       <a class="ext" href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a>
     </nav>
@@ -191,11 +200,15 @@
         гарантирующих их сохранность и исключающих несанкционированный доступ.</p>
 
       <h3>7. Файлы cookie</h3>
-      <p>7.1. Сайт не устанавливает файлы cookie и не сохраняет никаких данных в браузере
-        Пользователя: ни в локальном хранилище (<code>localStorage</code>), ни в хранилище
-        сессии, ни иным способом.</p>
-      <p>7.2. Запрет локального хранилища настройками браузера не влияет на работу Сайта,
-        потому что Сайт им не пользуется.</p>
+      <p>7.1. Сайт не устанавливает файлы cookie. Единственное, что он сохраняет в браузере
+        Пользователя, — выбранная тема оформления, светлая или тёмная, в локальном хранилище
+        (<code>localStorage</code>) под ключом <code>theme</code>. Это значение не передаётся
+        на сервер, не связано с личностью Пользователя и удаляется вместе с данными сайта
+        средствами браузера.</p>
+      <p>7.2. Пока выбор не сделан, тема берётся из системной настройки и не сохраняется
+        никуда. Пользователь может в любое время очистить локальное хранилище или запретить
+        его использование настройками браузера: тогда тема перестанет запоминаться между
+        посещениями, а остальные функции Сайта продолжат работать.</p>
 
       <h3>8. Заключительные положения</h3>
       <p>8.1. Настоящая политика является общедоступным документом и размещена на Сайте в
