@@ -330,11 +330,12 @@
         </article>
 
         <article class="card">
-          <div class="card-top"><h3>FastAPI · Postgres · pgvector</h3><span class="tag">praxis</span></div>
+          <div class="card-top"><h3>FastAPI · NumPy</h3><span class="tag">praxis</span></div>
           <p>
-            One API core serves every client. pgvector keeps the dense index in the same database
-            as the corpus, so there is no second system to keep in sync and no separate backup
-            story for the part that makes answers.
+            One API core serves every client. Dense retrieval is a matrix-vector product over
+            vectors held in memory and cached to disk, with a pure standard-library fallback so
+            the offline image and CI run without NumPy at all. A Postgres index with pgvector is
+            designed and not yet wired — the schema is in the repository, the retriever is not.
           </p>
         </article>
 
