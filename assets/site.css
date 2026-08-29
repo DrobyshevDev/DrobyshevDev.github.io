@@ -287,6 +287,25 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); letter-spacing: -.022em; }
 }
 .hero-since .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--bright); }
 
+/* The right half of the hero was empty at desktop widths because the headline
+   is capped at 17ch. The mark fills it at a size where its three bars read as
+   the shape they are, and it is decorative: the name is already in the header,
+   so it carries alt="" and is dropped entirely below the breakpoint rather
+   than shrunk into an ornament. */
+.hero-grid { display: grid; gap: clamp(32px, 5vw, 72px); align-items: center; }
+
+.hero-mark { display: none; }
+
+@media (min-width: 960px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) auto; }
+  .hero-mark { display: block; justify-self: end; }
+  .hero-mark img {
+    width: clamp(200px, 21vw, 288px);
+    height: auto;
+    border-radius: 24px;
+  }
+}
+
 /* --- Card grid ------------------------------------------------------------ */
 
 .cards {
