@@ -191,6 +191,21 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); letter-spacing: -.022em; }
   text-decoration: none; flex: none;
 }
 .brand .mark { width: 24px; height: 24px; border-radius: 23%; }
+.brand .mark {
+  transition: transform .35s cubic-bezier(.2, .7, .25, 1),
+              filter    .35s cubic-bezier(.2, .7, .25, 1);
+}
+.brand:hover .mark {
+  transform: translateY(-1px) rotate(-4deg) scale(1.1);
+  filter: drop-shadow(0 4px 10px rgba(124, 108, 224, .55));
+}
+
+/* Someone who has asked for less motion still gets the glow, which carries the
+   same "this responds" signal without anything moving. */
+@media (prefers-reduced-motion: reduce) {
+  .brand .mark, .hero-mark img { transition: filter .2s ease; }
+  .brand:hover .mark, .hero-mark:hover img { transform: none; }
+}
 
 .nav { display: flex; align-items: center; gap: 26px; margin-left: auto; }
 .nav a {
@@ -307,6 +322,19 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); letter-spacing: -.022em; }
     width: clamp(184px, 19vw, 256px);
     height: auto;
     border-radius: 23%;
+  }
+
+  /* Picking the tile up: it rises, tips towards the pointer and throws a
+     shadow in the mark's own violet. The glow is a drop-shadow rather than a
+     box-shadow so it follows the rounded silhouette instead of the box. */
+  .hero-mark img {
+    transition: transform .5s cubic-bezier(.2, .7, .25, 1),
+                filter    .5s cubic-bezier(.2, .7, .25, 1);
+    will-change: transform;
+  }
+  .hero-mark:hover img {
+    transform: translateY(-10px) rotate(-2deg) scale(1.035);
+    filter: drop-shadow(0 22px 44px rgba(124, 108, 224, .42));
   }
 }
 
