@@ -27,6 +27,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 # 1200x630 is what every platform crops to. Anything else gets letterboxed.
 W, H = 1200, 630
+MARK_PATH = Path(__file__).resolve().parent.parent / "assets" / "mark.png"
 
 INK = (10, 11, 14)
 INK_RAISED = (18, 20, 26)
@@ -72,21 +73,16 @@ def load_font(candidates, size):
     return ImageFont.load_default()
 
 
-MARK_BG = (79, 70, 229)
+def paste_mark(img, x, y, size):
+    """Paste the organisation mark, the same file the site and GitHub both show.
 
-
-def rounded_mark(draw, x, y, size):
-    """The organisation mark: three stacked bars, same as assets/mark.svg."""
-    draw.rounded_rectangle([x, y, x + size, y + size], radius=size * 0.25, fill=MARK_BG)
-    unit = size / 32
-    bars = [(7, 8, 18, 0.95), (7, 14.3, 12.6, 0.78), (7, 20.6, 7.4, 0.58)]
-    for bx, by, bw, alpha in bars:
-        # White at the given opacity over the indigo ground, composited per
-        # channel: averaging one number across all three turns it grey.
-        shade = tuple(round(255 * alpha + MARK_BG[c] * (1 - alpha)) for c in range(3))
-        draw.rounded_rectangle(
-            [x + bx * unit, y + by * unit, x + (bx + bw) * unit, y + (by + 3.4) * unit],
-            radius=1.7 * unit, fill=shade)
+    It is a raster rather than something drawn here on purpose: the mark has a
+    rim glow and scanlines that a dozen lines of Pillow would only approximate,
+    and a card that shows a near-miss of the logo is worse than one that shows
+    the logo.
+    """
+    mark = Image.open(MARK_PATH).convert("RGB").resize((size, size), Image.LANCZOS)
+    img.paste(mark, (int(x), int(y)))
 
 
 def render() -> Image.Image:
@@ -111,7 +107,8 @@ def render() -> Image.Image:
     f_domain = load_font(MONO, 26)
 
     pad = 84
-    rounded_mark(d, pad, 74, 56)
+    paste_mark(img, pad, 74, 56)
+    d = ImageDraw.Draw(img)
     d.text((pad + 76, 82), "DrobyshevDev", font=f_brand, fill=PAPER)
 
     d.text((pad, 196), TITLE, font=f_title, fill=PAPER)
@@ -200,8 +197,8 @@ def main(argv) -> int:
     print(f"wrote {out} ({out.stat().st_size:,} bytes)")
 
     # The touch icon reuses the mark, which is the same shape the favicon uses.
-    icon = Image.new("RGB", (180, 180), (79, 70, 229))
-    rounded_mark(ImageDraw.Draw(icon), 0, 0, 180)
+    icon = Image.new("RGB", (180, 180), (5, 4, 27))
+    paste_mark(icon, 0, 0, 180)
     icon_path = out.parent / "apple-touch-icon.png"
     icon.save(icon_path, optimize=True)
     print(f"wrote {icon_path} ({icon_path.stat().st_size:,} bytes)")

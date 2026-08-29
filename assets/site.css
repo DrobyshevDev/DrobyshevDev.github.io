@@ -190,7 +190,7 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); letter-spacing: -.022em; }
   font-weight: 800; font-size: .9375rem; letter-spacing: -.02em;
   text-decoration: none; flex: none;
 }
-.brand .mark { width: 24px; height: 24px; border-radius: var(--radius); }
+.brand .mark { width: 24px; height: 24px; border-radius: 23%; }
 
 .nav { display: flex; align-items: center; gap: 26px; margin-left: auto; }
 .nav a {
@@ -300,9 +300,13 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); letter-spacing: -.022em; }
   .hero-grid { grid-template-columns: minmax(0, 1fr) auto; }
   .hero-mark { display: block; justify-self: end; }
   .hero-mark img {
-    width: clamp(200px, 21vw, 288px);
+    /* Capped at 256 because the mark is a 372px raster: past that it softens.
+       The 23% radius trims the file's own dark corners, which would otherwise
+       show as a black square on the light theme; the rim glow reaches the
+       middle of each edge, not the corners, so nothing of it is lost. */
+    width: clamp(184px, 19vw, 256px);
     height: auto;
-    border-radius: 24px;
+    border-radius: 23%;
   }
 }
 
