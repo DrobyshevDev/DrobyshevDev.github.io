@@ -311,9 +311,65 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); letter-spacing: -.022em; }
 
 .hero-mark { display: none; }
 
+/* --- The mark's menu ------------------------------------------------------ */
+
+.mark-trigger {
+  display: block; padding: 0; border: 0; background: none;
+  cursor: pointer; border-radius: 23%;
+}
+
+.mark-menu {
+  position: absolute; top: calc(100% + 14px); right: 0; z-index: 20;
+  min-width: 236px; padding: 8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .28), 0 2px 6px rgba(0, 0, 0, .12);
+}
+.mark-menu[hidden] { display: none; }
+
+/* Flipped up when the tile sits low enough that the panel would run off the
+   bottom of the window; the script measures and sets this. */
+.mark-menu.is-up { top: auto; bottom: calc(100% + 14px); }
+.mark-menu.is-up li { transform: translateY(6px); }
+
+.mark-menu-title {
+  font-size: .6875rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 6px 10px 10px;
+}
+
+.mark-menu ul { list-style: none; margin: 0; padding: 0; }
+
+.mark-menu a {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 9px 10px; border-radius: 6px;
+  text-decoration: none; color: var(--ink);
+  transition: background .15s, transform .15s;
+}
+.mark-menu a:hover { background: var(--ground-2); transform: translateX(3px); }
+
+.mark-menu-name { font-family: var(--font-mono); font-size: .875rem; font-weight: 600; }
+.mark-menu-note { font-size: .75rem; color: var(--ink-3); margin-left: auto; }
+
+/* Each row arrives a beat after the one above it, so the menu unrolls instead
+   of appearing all at once. The delay is set per item from the script. */
+.mark-menu li {
+  opacity: 0; transform: translateY(-6px);
+  animation: mark-menu-in .28s cubic-bezier(.2, .7, .25, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 38ms);
+}
+@keyframes mark-menu-in { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mark-menu li { animation: none; opacity: 1; transform: none; }
+  .mark-menu a:hover { transform: none; }
+}
+
 @media (min-width: 960px) {
   .hero-grid { grid-template-columns: minmax(0, 1fr) auto; }
-  .hero-mark { display: block; justify-self: end; }
+  .hero-mark { display: block; justify-self: end; position: relative; }
   .hero-mark img {
     /* Capped at 256 because the mark is a 372px raster: past that it softens.
        The 23% radius trims the file's own dark corners, which would otherwise
@@ -332,9 +388,17 @@ h3 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); letter-spacing: -.022em; }
                 filter    .5s cubic-bezier(.2, .7, .25, 1);
     will-change: transform;
   }
-  .hero-mark:hover img {
+  .mark-trigger:hover img,
+  .mark-trigger:focus-visible img {
     transform: translateY(-10px) rotate(-2deg) scale(1.035);
     filter: drop-shadow(0 22px 44px rgba(124, 108, 224, .42));
+  }
+  /* Held down, and while the menu is open, the tile sits back on the surface:
+     the lift means "you can pick this up", so it should stop once you have. */
+  .mark-trigger:active img,
+  .mark-trigger[aria-expanded="true"] img {
+    transform: translateY(-2px) rotate(0deg) scale(1.01);
+    filter: drop-shadow(0 10px 24px rgba(124, 108, 224, .34));
   }
 }
 
