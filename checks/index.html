@@ -151,6 +151,11 @@
               <td><code>tests/test_eval.py</code></td>
             </tr>
             <tr>
+              <td>praxis's offline retrieval figures are what a run actually produces</td>
+              <td>the quality table in both praxis READMEs</td>
+              <td><code>tests/test_eval.py</code>, under <code>PRAXIS_OFFLINE=1</code></td>
+            </tr>
+            <tr>
               <td>praxis depends on this organisation's own packages, not on strangers' names</td>
               <td><code>pyproject.toml</code> extras</td>
               <td><code>tests/test_packaging.py</code></td>
@@ -242,12 +247,13 @@
 
       <dl class="facts" style="max-width:44rem;margin-top:20px">
         <div>
-          <dt>praxis retrieval metrics</dt>
+          <dt>praxis on real models</dt>
           <dd>
-            recall@5 0.92 and MRR 0.94 on the full corpus are stated in prose. They depend on
-            which models are installed, so holding them needs a scheduled re-run like
-            decisionrl's, not a unit test. The golden set's size and a recall floor of 0.7 are
-            pinned; the headline figures are not.
+            recall@5 0.92 and MRR 0.94 on the full corpus are stated in prose and measured on a
+            GPU that CI does not have. The offline column of the same table is now held by a test
+            — the offline path has no models, no network and no seed, so a run of it is
+            reproducible — but the GPU column needs a scheduled re-run on real hardware, the way
+            decisionrl re-verifies its applied claims nightly.
           </dd>
         </div>
         <div>
