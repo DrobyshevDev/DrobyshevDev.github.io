@@ -36,6 +36,9 @@ jobs:
           #   behind it, not merely a directory.
           # --include-fragments catches a nav entry pointing at a heading id
           #   that has since been renamed — the failure this check is for.
+          # --exclude-loopback drops http://localhost:8000, which the README
+          #   gives as the address to open after starting a local server. It is
+          #   an instruction, not a link, and no runner will ever reach it.
           # 403 and 429 are accepted because sites rate-limit datacentre
           #   traffic: they say something about the runner, not about the link.
           args: >-
@@ -43,6 +46,7 @@ jobs:
             --max-retries 3
             --timeout 20
             --accept 200,206,403,429
+            --exclude-loopback=true
             --root-dir "${{ github.workspace }}"
             --index-files index.html
             --include-fragments=anchor-only
