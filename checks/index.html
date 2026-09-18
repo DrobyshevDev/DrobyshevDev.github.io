@@ -161,6 +161,16 @@
               <td><code>tests/test_packaging.py</code></td>
             </tr>
             <tr>
+              <td>Every Python package here type-checks</td>
+              <td>the organisation profile — "open source, typed, and tested"</td>
+              <td><code>mypy</code> in each repository's CI</td>
+            </tr>
+            <tr>
+              <td>No workflow runs an action it took from a moving tag</td>
+              <td>implied by every badge above, which those workflows produce</td>
+              <td><code>scripts/org_triage.py</code>, weekly</td>
+            </tr>
+            <tr>
               <td>This site makes no third-party request of any kind</td>
               <td>the legal page</td>
               <td><code>scripts/check_site.py</code>, on every change</td>
@@ -219,6 +229,11 @@
               <td>The figures on this site against their sources</td>
               <td>weekly</td>
               <td>one standing issue names the page, what it says, and what the source says</td>
+            </tr>
+            <tr>
+              <td>Actions that have gone back to a moving tag</td>
+              <td>weekly, across every repository</td>
+              <td>the triage names the repository and the references — and says <em>unknown</em> rather than <em>fine</em> when it could not read the workflows</td>
             </tr>
             <tr>
               <td>Organisation-wide maintenance triage</td>
