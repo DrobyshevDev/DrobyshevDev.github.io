@@ -12,7 +12,10 @@ front page be the exception.
 Each figure here names its source and is checked against it:
 
   algorithms / environments  decisionrl's CITATION.cff, which decisionrl's own
-                             test suite pins to the package it ships
+                             test suite pins to the package it ships -- checked
+                             on this site and in the organisation profile, which
+                             spells the same figures out in words and so escaped
+                             every check that looked for digits
   required dependencies      glia's pyproject.toml, read directly
   line coverage              Codecov, the run that produced it
 
@@ -40,6 +43,16 @@ RAW = "https://raw.githubusercontent.com/DrobyshevDev"
 CODECOV = "https://api.codecov.io/api/v2/github/DrobyshevDev/repos/decisionrl/"
 
 PAGES = ("index.html", "ru/index.html")
+
+# The organisation profile states the same counts in words. That is how "thirty-one
+# algorithms and twenty-two environments" survived every correction made to the
+# digits elsewhere.
+PROFILE = f"{RAW}/.github/master/profile/README.md"
+WORDS = {
+    22: "twenty-two", 23: "twenty-three", 24: "twenty-four", 25: "twenty-five",
+    29: "twenty-nine", 30: "thirty", 31: "thirty-one", 32: "thirty-two",
+    33: "thirty-three", 34: "thirty-four", 35: "thirty-five",
+}
 
 
 def fetch(url: str) -> str | None:
@@ -147,7 +160,35 @@ def main(root: Path) -> int:
                     f"{name}: coverage says {stated}, Codecov measures {coverage:.1f}%"
                 )
 
-    unchecked.append("recall@5 — praxis states it in prose, with no eval run pinning it")
+    if counts is not None:
+        algorithms, environments, _ = counts
+        profile = fetch(PROFILE)
+        if profile is None:
+            unchecked.append("the organisation profile could not be read")
+        else:
+            lowered = profile.lower()
+            for value, label in ((algorithms, "algorithms"), (environments, "environments")):
+                word = WORDS.get(value)
+                if word is None:
+                    unchecked.append(f"no word for {value} {label} in the profile check")
+                    continue
+                # Read the word actually in front of the noun, rather than asking
+                # whether the right word appears anywhere: "thirty-two algorithms
+                # and twenty-four environments" contains both, and a check that
+                # only looks for presence cannot tell which belongs to which.
+                stated = re.search(rf"([a-z]+(?:-[a-z]+)?) {label}\b", lowered)
+                if stated is None:
+                    problems.append(f"organisation profile: no longer states a count of {label}")
+                elif stated.group(1) != word:
+                    problems.append(
+                        f"organisation profile: says {stated.group(1)} {label}, "
+                        f"decisionrl ships {word} ({value})"
+                    )
+
+    unchecked.append(
+        "praxis on real models — the offline column of its quality table is pinned by a "
+        "test; recall@5 0.92 and MRR 0.94 need a GPU CI does not have"
+    )
 
     for problem in problems:
         print(f"  DRIFTED  {problem}")
