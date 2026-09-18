@@ -2,6 +2,12 @@ name: External links
 
 # Outbound links rot on someone else's schedule, so this runs weekly rather
 # than on every push, and opens an issue instead of failing a pull request.
+#
+# The check reads the files as they sit in the checkout, where a link the page
+# uses at runtime — `/assets/site.css`, `/ru/` — is root-relative and has no
+# meaning without a root. `--root-dir` supplies one. Without it every such link
+# is reported unresolvable, which is what turned six weekly runs into six
+# identical issues listing twenty-nine broken links on a site that had none.
 on:
   schedule:
     - cron: "0 6 * * 1"
@@ -22,18 +28,57 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
+          # Pinned: an unpinned checker changes the meaning of a green run
+          # without a commit. Moving it is a decision, so it is made here.
+          lycheeVersion: v0.24.2
+          # --root-dir must be absolute, which is what github.workspace is.
+          # --index-files makes a directory link prove there is an index.html
+          #   behind it, not merely a directory.
+          # --include-fragments catches a nav entry pointing at a heading id
+          #   that has since been renamed — the failure this check is for.
+          # 403 and 429 are accepted because sites rate-limit datacentre
+          #   traffic: they say something about the runner, not about the link.
           args: >-
             --no-progress
             --max-retries 3
             --timeout 20
             --accept 200,206,403,429
-            index.html ru/index.html 404.html README.md
+            --root-dir "${{ github.workspace }}"
+            --index-files index.html
+            --include-fragments=anchor-only
+            index.html ru/index.html legal/index.html 404.html README.md
           fail: false
 
-      - name: Open an issue when something is broken
+      - name: Find the standing link issue
+        id: standing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          number=$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --label maintenance \
+            --search 'in:title "Broken outbound links on the site"' \
+            --limit 1 --json number --jq '.[0].number // empty')
+          echo "number=${number}" >> "$GITHUB_OUTPUT"
+
+      - name: Report into the standing issue
         if: steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v6
         with:
+          # One issue, rewritten in place. A new issue every Monday buried the
+          # repository in copies of the same report and taught everyone to
+          # ignore the label, which is the opposite of what the check is for.
+          issue-number: ${{ steps.standing.outputs.number }}
           title: Broken outbound links on the site
           content-filepath: ./lychee/out.md
           labels: maintenance
+
+      - name: Close the standing issue once every link resolves
+        if: steps.lychee.outputs.exit_code == 0 && steps.standing.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue close "${{ steps.standing.outputs.number }}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --comment "Every link resolved on the run for \`${{ github.sha }}\`. A future break reopens this issue automatically."
