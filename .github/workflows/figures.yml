@@ -1,0 +1,92 @@
+name: Figures
+
+# The front page states four numbers under "Numbers with the conditions they
+# were measured under". Three were typed by hand, and by September 2026 two had
+# gone stale: decisionrl had grown to 32 algorithms across 24 environments while
+# the page said 31 and 22, and coverage read 86% where CI measured 84%. The one
+# organisation-wide rule this site advertises is that a published number is
+# measured on the run that describes it; its own front page was the exception.
+#
+# This reads each figure's source and reports drift into one standing issue.
+# It is a separate workflow rather than a step in CI because it needs the
+# network, and a required check that depends on someone else's uptime teaches
+# people to re-run it rather than to read it.
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  figures:
+    name: Check the stated figures against their sources
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Compare
+        id: figures
+        run: |
+          python scripts/check_figures.py . | tee figures.txt
+          echo "drifted=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+
+      - name: Build the report
+        if: steps.figures.outputs.drifted != '0'
+        run: |
+          {
+            echo "A figure on the front page no longer matches the repository it describes."
+            echo
+            echo '```'
+            cat figures.txt
+            echo '```'
+            echo
+            echo "Each line names the page, what it says, and what the source says."
+            echo "Reproduce with \`python scripts/check_figures.py .\`."
+          } > report.md
+
+      - name: Find the standing figures issue
+        id: standing
+        if: steps.figures.outputs.drifted != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          number=$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --label maintenance \
+            --search 'in:title "A figure on the site has drifted"' \
+            --limit 1 --json number --jq '.[0].number // empty')
+          echo "number=${number}" >> "$GITHUB_OUTPUT"
+
+      - name: Report into the standing issue
+        if: steps.figures.outputs.drifted != '0'
+        uses: peter-evans/create-issue-from-file@v6
+        with:
+          issue-number: ${{ steps.standing.outputs.number }}
+          title: A figure on the site has drifted
+          content-filepath: ./report.md
+          labels: maintenance
+
+      - name: Close the standing issue once every figure matches
+        if: steps.figures.outputs.drifted == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          number=$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --label maintenance \
+            --search 'in:title "A figure on the site has drifted"' \
+            --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$number" ]; then
+            gh issue close "$number" --repo "$GITHUB_REPOSITORY" \
+              --comment "Every checkable figure matches its source again, as of \`${{ github.sha }}\`."
+          fi
