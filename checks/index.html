@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is checked — DrobyshevDev</title>
+<meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131316" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Every number DrobyshevDev publishes, the file that holds it to the code, and the checks that run on a schedule — including the claims nothing checks yet.">
+<link rel="canonical" href="https://drobyshevdev.github.io/checks/">
+<link rel="alternate" hreflang="en" href="https://drobyshevdev.github.io/checks/">
+<link rel="alternate" hreflang="ru" href="https://drobyshevdev.github.io/ru/checks/">
+<link rel="alternate" hreflang="x-default" href="https://drobyshevdev.github.io/checks/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DrobyshevDev">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="What is checked — DrobyshevDev">
+<meta property="og:description" content="Every number DrobyshevDev publishes, the file that holds it to the code, and the checks that run on a schedule — including the claims nothing checks yet.">
+<meta property="og:url" content="https://drobyshevdev.github.io/checks/">
+<meta property="og:image" content="https://drobyshevdev.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css">
+
+<style>
+  /* .measure was written for the bright band, where the ink is near-black and
+     the borders are mixed against it. This page uses the default band, so the
+     header, the caption and the rules take the page's own colours instead --
+     otherwise the header row is #16160f on a dark background, which is to say
+     invisible. Scoped here rather than changed in site.css, because the bright
+     band still wants the original. */
+  .measure th { color: var(--ink-2); border-bottom-color: var(--line-2); }
+  .measure caption { color: var(--ink-3); }
+  .measure td { border-bottom-color: var(--line); }
+  /* On the front page the emphasised column is a measured number and the last
+     column is a footnote. Here the last column is the file that holds the claim
+     -- the point of the table -- so the emphasis moves there and the middle
+     column, which only says where the claim appears, goes quiet. */
+  .measure td:nth-child(2) { font-weight: 400; }
+  .measure td:last-child { font-weight: 600; opacity: 1; color: var(--ink); }
+</style>
+
+<script>
+  // Applied before first paint, so the page does not flash the wrong theme.
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img class="mark" src="/assets/mark.png" alt="" width="22" height="22">
+      DrobyshevDev
+    </a>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="/#projects">Projects</a>
+      <a href="/#notes">Course</a>
+      <a href="/#method">How we work</a>
+      <a href="/checks/" aria-current="page">Checks</a>
+      <a class="ext" href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a>
+    </nav>
+
+    <div class="nav-tools">
+      <a class="lang-switch" href="/ru/checks/">Русский</a>
+      <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="band" style="padding-top:48px">
+  <div class="wrap">
+
+    <p class="eyebrow"><span class="dot"></span> Checks</p>
+    <h1 style="margin:14px 0 18px">What is checked, and what is not</h1>
+    <p class="lead" style="margin-bottom:32px">
+      Every project here publishes numbers. This page says, for each of them, which file holds it
+      to the code and what happens when the two disagree — and then lists the claims nothing
+      checks yet, because a page like this is worth reading only if the second list is real.
+    </p>
+
+    <nav class="chips" aria-label="Sections" style="margin-bottom:40px">
+      <a class="chip chip-accent" href="#pinned">Numbers pinned to code</a>
+      <a class="chip chip-accent" href="#scheduled">What runs on a schedule</a>
+      <a class="chip" href="#unchecked">What nothing checks yet</a>
+    </nav>
+
+    <!-- ==================== Pinned ==================== -->
+    <section id="pinned" class="legal">
+      <h2>Numbers pinned to code</h2>
+      <p>
+        A number in prose rots quietly; a failing test does not. Each row below is a claim that
+        appears in a README, a citation file or on this site, and the file that makes it
+        answerable to the package that ships.
+      </p>
+
+      <div class="measure" style="margin-top:24px">
+        <table>
+          <caption>
+            Every claim here fails a build when it stops being true. The right-hand column is the
+            file to read if you want to know exactly what is being asserted.
+          </caption>
+          <thead>
+            <tr><th>Claim</th><th>Where it is stated</th><th>What holds it</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>decisionrl ships 32 algorithms, 24 environments, 9 of them applied</td>
+              <td>README prose and badges, <code>CITATION.cff</code>, <code>.zenodo.json</code>, <code>pyproject.toml</code>, this site</td>
+              <td><code>tests/test_documented_counts.py</code></td>
+            </tr>
+            <tr>
+              <td>The applied tasks where a learned policy beats the classical baseline still do</td>
+              <td>decisionrl README results table</td>
+              <td><code>.github/workflows/verify.yml</code>, nightly, 3 seeds</td>
+            </tr>
+            <tr>
+              <td>decisionrl line coverage does not fall below 80%</td>
+              <td>this site, Codecov badge</td>
+              <td><code>fail_under</code> in <code>pyproject.toml</code></td>
+            </tr>
+            <tr>
+              <td>glia needs no dependency outside the standard library</td>
+              <td>glia README badge, this site</td>
+              <td><code>dependencies = []</code>, offline test suite</td>
+            </tr>
+            <tr>
+              <td>glia line coverage does not fall below 90%</td>
+              <td>glia CI</td>
+              <td><code>--cov-fail-under=90</code></td>
+            </tr>
+            <tr>
+              <td>The English and Russian mlango READMEs carry the same badges and commands</td>
+              <td>both READMEs, and the PyPI landing page</td>
+              <td><code>tests/test_pipelines.py::TestReadme</code></td>
+            </tr>
+            <tr>
+              <td>The praxis golden set is the size the README says it is</td>
+              <td>praxis README, both languages</td>
+              <td><code>tests/test_eval.py</code></td>
+            </tr>
+            <tr>
+              <td>praxis depends on this organisation's own packages, not on strangers' names</td>
+              <td><code>pyproject.toml</code> extras</td>
+              <td><code>tests/test_packaging.py</code></td>
+            </tr>
+            <tr>
+              <td>This site makes no third-party request of any kind</td>
+              <td>the legal page</td>
+              <td><code>scripts/check_site.py</code>, on every change</td>
+            </tr>
+            <tr>
+              <td>The figures on the front page match the repositories they describe</td>
+              <td>the front page, both languages</td>
+              <td><code>scripts/check_figures.py</code>, weekly</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== Scheduled ==================== -->
+    <section id="scheduled" class="legal" style="margin-top:56px">
+      <h2>What runs on a schedule</h2>
+      <p>
+        A check that runs only on a commit stops telling the truth the moment the world moves
+        without one — a link rots, a model is withdrawn, a dependency is patched. These run
+        whether or not anyone pushed.
+      </p>
+
+      <div class="measure" style="margin-top:24px">
+        <table>
+          <caption>
+            Scheduled checks write into one standing issue each and close it themselves when the
+            problem resolves, so an open issue means an open problem rather than a backlog of
+            notifications.
+          </caption>
+          <thead>
+            <tr><th>Check</th><th>How often</th><th>When it fails</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Re-verify decisionrl's published results</td>
+              <td>nightly</td>
+              <td>the build goes red — the claim in the README is no longer reproducible</td>
+            </tr>
+            <tr>
+              <td>OpenSSF Scorecard: signed releases, pinned actions, patch latency</td>
+              <td>weekly, per repository</td>
+              <td>the grade drops, publicly, and findings land in code scanning</td>
+            </tr>
+            <tr>
+              <td>CodeQL static analysis</td>
+              <td>on every change and weekly</td>
+              <td>an alert opens in the repository's security tab</td>
+            </tr>
+            <tr>
+              <td>Outbound links on this site and in the research notes</td>
+              <td>weekly</td>
+              <td>one standing issue lists what broke</td>
+            </tr>
+            <tr>
+              <td>The figures on this site against their sources</td>
+              <td>weekly</td>
+              <td>one standing issue names the page, what it says, and what the source says</td>
+            </tr>
+            <tr>
+              <td>Organisation-wide maintenance triage</td>
+              <td>weekly</td>
+              <td>one issue lists what needs a decision, ordered by that rather than by repository</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:24px">
+        Test suites themselves run on Linux, macOS and Windows, across every interpreter each
+        package claims to support, because "works on my machine" is the failure mode all of this
+        exists to rule out.
+      </p>
+    </section>
+
+    <!-- ==================== Unchecked ==================== -->
+    <section id="unchecked" class="legal" style="margin-top:56px">
+      <h2>What nothing checks yet</h2>
+      <p>
+        This is the part of the page that makes the rest worth reading. These claims are published
+        and are not held by anything; they are listed here rather than quietly counted among the
+        checked ones.
+      </p>
+
+      <dl class="facts" style="max-width:44rem;margin-top:20px">
+        <div>
+          <dt>praxis retrieval metrics</dt>
+          <dd>
+            recall@5 0.92 and MRR 0.94 on the full corpus are stated in prose. They depend on
+            which models are installed, so holding them needs a scheduled re-run like
+            decisionrl's, not a unit test. The golden set's size and a recall floor of 0.7 are
+            pinned; the headline figures are not.
+          </dd>
+        </div>
+        <div>
+          <dt>The praxis corpus against the official publication</dt>
+          <dd>
+            The six codes shipped in the repository are transcriptions from Wikisource, marked in
+            the corpus as pending a check against pravo.gov.ru. The parser for that source is how
+            an edition gets confirmed, and it has not been run against every article.
+          </dd>
+        </div>
+        <div>
+          <dt>Anything about adoption</dt>
+          <dd>
+            No download counts, no star counts, no user numbers appear anywhere on this site,
+            because none of them would survive the standard the rest of this page sets.
+          </dd>
+        </div>
+      </dl>
+
+      <p style="margin-top:24px">
+        Each of these is a gap to close where it lives, not something to reword here. When one
+        closes, it moves to the first table.
+      </p>
+    </section>
+
+    <p class="lm-fine" style="margin-top:48px;color:var(--text-faint);font-size:.85rem">
+      This page describes the checking regime rather than its current status; for the state of any
+      individual run, the Actions tab of the repository in question is the source.
+      History of this page —
+      <a href="https://github.com/DrobyshevDev/DrobyshevDev.github.io/commits/main/checks/index.html" rel="noopener">in the repository</a>.
+    </p>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:0;padding-top:0">
+      <p>© <span data-year>2026</span> DrobyshevDev. Source released under MIT and Apache-2.0.</p>
+      <p><a href="/">← Home</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

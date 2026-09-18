@@ -18,6 +18,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://drobyshevdev.github.io/checks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drobyshevdev.github.io/checks/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://drobyshevdev.github.io/ru/checks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://drobyshevdev.github.io/checks/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drobyshevdev.github.io/ru/checks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://drobyshevdev.github.io/checks/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://drobyshevdev.github.io/ru/checks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://drobyshevdev.github.io/checks/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://drobyshevdev.github.io/legal/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
