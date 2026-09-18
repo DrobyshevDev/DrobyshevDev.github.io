@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Что проверяется — DrobyshevDev</title>
+<meta name="theme-color" content="#fdfcfa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131316" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Каждое число, которое публикует DrobyshevDev, файл, который держит его в соответствии с кодом, и проверки по расписанию — включая утверждения, которые пока не держит ничто.">
+<link rel="canonical" href="https://drobyshevdev.github.io/ru/checks/">
+<link rel="alternate" hreflang="en" href="https://drobyshevdev.github.io/checks/">
+<link rel="alternate" hreflang="ru" href="https://drobyshevdev.github.io/ru/checks/">
+<link rel="alternate" hreflang="x-default" href="https://drobyshevdev.github.io/checks/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DrobyshevDev">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Что проверяется — DrobyshevDev">
+<meta property="og:description" content="Каждое число, которое публикует DrobyshevDev, файл, который держит его в соответствии с кодом, и проверки по расписанию — включая утверждения, которые пока не держит ничто.">
+<meta property="og:url" content="https://drobyshevdev.github.io/ru/checks/">
+<meta property="og:image" content="https://drobyshevdev.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/site.css">
+
+<style>
+  /* .measure was written for the bright band, where the ink is near-black and
+     the borders are mixed against it. This page uses the default band, so the
+     header, the caption and the rules take the page's own colours instead --
+     otherwise the header row is #16160f on a dark background, which is to say
+     invisible. Scoped here rather than changed in site.css, because the bright
+     band still wants the original. */
+  .measure th { color: var(--ink-2); border-bottom-color: var(--line-2); }
+  .measure caption { color: var(--ink-3); }
+  .measure td { border-bottom-color: var(--line); }
+  /* On the front page the emphasised column is a measured number and the last
+     column is a footnote. Here the last column is the file that holds the claim
+     -- the point of the table -- so the emphasis moves there and the middle
+     column, which only says where the claim appears, goes quiet. */
+  .measure td:nth-child(2) { font-weight: 400; }
+  .measure td:last-child { font-weight: 600; opacity: 1; color: var(--ink); }
+</style>
+
+<script>
+  // Применяется до первой отрисовки, чтобы страница не мигала чужой темой.
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+</script>
+
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/ru/">
+      <img class="mark" src="/assets/mark.png" alt="" width="22" height="22">
+      DrobyshevDev
+    </a>
+
+    <nav class="nav" id="primary-nav" aria-label="Основная навигация">
+      <a href="/ru/#projects">Проекты</a>
+      <a href="/ru/#notes">Курс</a>
+      <a href="/ru/#method">Как мы работаем</a>
+      <a href="/ru/checks/" aria-current="page">Проверки</a>
+      <a class="ext" href="https://github.com/DrobyshevDev" rel="noopener">GitHub</a>
+    </nav>
+
+    <div class="nav-tools">
+      <a class="lang-switch" href="/checks/">English</a>
+      <button class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Открыть меню">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="band" style="padding-top:48px">
+  <div class="wrap">
+
+    <p class="eyebrow"><span class="dot"></span> Проверки</p>
+    <h1 style="margin:14px 0 18px">Что проверяется, а что нет</h1>
+    <p class="lead" style="margin-bottom:32px">
+      Каждый проект здесь публикует числа. Эта страница говорит про каждое из них, какой файл
+      держит его в соответствии с кодом и что происходит, когда они расходятся, — а затем
+      перечисляет утверждения, которые пока не держит ничто. Читать такую страницу имеет смысл
+      только если второй список настоящий.
+    </p>
+
+    <nav class="chips" aria-label="Разделы" style="margin-bottom:40px">
+      <a class="chip chip-accent" href="#pinned">Числа, прибитые к коду</a>
+      <a class="chip chip-accent" href="#scheduled">Что работает по расписанию</a>
+      <a class="chip" href="#unchecked">Что пока не проверяется</a>
+    </nav>
+
+    <!-- ==================== Прибитые ==================== -->
+    <section id="pinned" class="legal">
+      <h2>Числа, прибитые к коду</h2>
+      <p>
+        Число в прозе тихо портится, упавший тест — нет. Каждая строка ниже — это утверждение из
+        README, файла цитирования или этого сайта, и файл, который делает его подотчётным тому,
+        что действительно поставляется.
+      </p>
+
+      <div class="measure" style="margin-top:24px">
+        <table>
+          <caption>
+            Каждое утверждение отсюда роняет сборку, когда перестаёт быть верным. Правая колонка —
+            файл, который стоит прочитать, если хочется понять, что именно утверждается.
+          </caption>
+          <thead>
+            <tr><th>Утверждение</th><th>Где заявлено</th><th>Чем держится</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>В decisionrl 32 алгоритма и 24 среды, девять из них прикладные</td>
+              <td>проза и бейджи README, <code>CITATION.cff</code>, <code>.zenodo.json</code>, <code>pyproject.toml</code>, этот сайт</td>
+              <td><code>tests/test_documented_counts.py</code></td>
+            </tr>
+            <tr>
+              <td>Прикладные задачи, где обученная политика обыгрывает классический метод, обыгрывают его до сих пор</td>
+              <td>таблица результатов в README decisionrl</td>
+              <td><code>.github/workflows/verify.yml</code>, еженощно, 3 сида</td>
+            </tr>
+            <tr>
+              <td>Покрытие decisionrl не опускается ниже 80%</td>
+              <td>этот сайт, бейдж Codecov</td>
+              <td><code>fail_under</code> в <code>pyproject.toml</code></td>
+            </tr>
+            <tr>
+              <td>glia не нуждается ни в одной зависимости вне стандартной библиотеки</td>
+              <td>бейдж README glia, этот сайт</td>
+              <td><code>dependencies = []</code>, офлайн-набор тестов</td>
+            </tr>
+            <tr>
+              <td>Покрытие glia не опускается ниже 90%</td>
+              <td>CI glia</td>
+              <td><code>--cov-fail-under=90</code></td>
+            </tr>
+            <tr>
+              <td>Английский и русский README mlango несут одни и те же бейджи и команды</td>
+              <td>оба README и страница пакета на PyPI</td>
+              <td><code>tests/test_pipelines.py::TestReadme</code></td>
+            </tr>
+            <tr>
+              <td>Золотой набор praxis того размера, который называет README</td>
+              <td>README praxis, обе версии</td>
+              <td><code>tests/test_eval.py</code></td>
+            </tr>
+            <tr>
+              <td>praxis зависит от пакетов этой организации, а не от чужих имён</td>
+              <td>extras в <code>pyproject.toml</code></td>
+              <td><code>tests/test_packaging.py</code></td>
+            </tr>
+            <tr>
+              <td>Этот сайт не делает ни одного запроса к сторонним доменам</td>
+              <td>юридическая страница</td>
+              <td><code>scripts/check_site.py</code>, при каждом изменении</td>
+            </tr>
+            <tr>
+              <td>Числа на главной совпадают с репозиториями, которые они описывают</td>
+              <td>главная страница, обе версии</td>
+              <td><code>scripts/check_figures.py</code>, еженедельно</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== По расписанию ==================== -->
+    <section id="scheduled" class="legal" style="margin-top:56px">
+      <h2>Что работает по расписанию</h2>
+      <p>
+        Проверка, которая запускается только на коммит, перестаёт говорить правду в тот момент,
+        когда мир сдвигается без коммита: ссылка портится, модель отзывают, зависимость
+        патчат. Эти работают независимо от того, пушил кто-нибудь или нет.
+      </p>
+
+      <div class="measure" style="margin-top:24px">
+        <table>
+          <caption>
+            Проверки по расписанию пишут каждая в одну стоячую issue и сами её закрывают, когда
+            проблема уходит. Поэтому открытая issue означает открытую проблему, а не очередь
+            уведомлений.
+          </caption>
+          <thead>
+            <tr><th>Проверка</th><th>Как часто</th><th>Что при отказе</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Перепроверка опубликованных результатов decisionrl</td>
+              <td>еженощно</td>
+              <td>сборка краснеет — заявленное в README больше не воспроизводится</td>
+            </tr>
+            <tr>
+              <td>OpenSSF Scorecard: подписанные релизы, закреплённые actions, скорость патчей</td>
+              <td>еженедельно, по репозиторию</td>
+              <td>оценка падает публично, находки попадают в code scanning</td>
+            </tr>
+            <tr>
+              <td>Статический анализ CodeQL</td>
+              <td>при каждом изменении и еженедельно</td>
+              <td>алерт во вкладке безопасности репозитория</td>
+            </tr>
+            <tr>
+              <td>Внешние ссылки на сайте и в исследовательских заметках</td>
+              <td>еженедельно</td>
+              <td>одна стоячая issue перечисляет, что сломалось</td>
+            </tr>
+            <tr>
+              <td>Числа на этом сайте против их источников</td>
+              <td>еженедельно</td>
+              <td>одна стоячая issue называет страницу, её версию и версию источника</td>
+            </tr>
+            <tr>
+              <td>Триаж обслуживания по всей организации</td>
+              <td>еженедельно</td>
+              <td>одна issue перечисляет то, что требует решения, в порядке важности, а не по репозиториям</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:24px">
+        Сами наборы тестов гоняются на Linux, macOS и Windows, на каждом интерпретаторе, который
+        пакет обещает поддерживать, — потому что «у меня работает» и есть тот отказ, ради
+        исключения которого всё это существует.
+      </p>
+    </section>
+
+    <!-- ==================== Не проверяется ==================== -->
+    <section id="unchecked" class="legal" style="margin-top:56px">
+      <h2>Что пока не проверяется</h2>
+      <p>
+        Это та часть страницы, ради которой стоит читать остальные. Эти утверждения опубликованы
+        и не держатся ничем; они перечислены здесь, а не тихо засчитаны в проверенные.
+      </p>
+
+      <dl class="facts" style="max-width:44rem;margin-top:20px">
+        <div>
+          <dt>Метрики поиска praxis</dt>
+          <dd>
+            recall@5 0.92 и MRR 0.94 по полному корпусу заявлены прозой. Они зависят от того,
+            какие модели установлены, поэтому держать их нужно перезапуском по расписанию, как в
+            decisionrl, а не юнит-тестом. Размер золотого набора и нижняя граница recall 0.7
+            прибиты; сами заголовочные числа — нет.
+          </dd>
+        </div>
+        <div>
+          <dt>Корпус praxis против официальной публикации</dt>
+          <dd>
+            Шесть кодексов в репозитории — транскрипции с Wikisource, помеченные в корпусе как
+            ожидающие сверки с pravo.gov.ru. Парсер этого источника и есть способ подтвердить
+            редакцию, и он прогнан не по каждой статье.
+          </dd>
+        </div>
+        <div>
+          <dt>Что угодно про распространение</dt>
+          <dd>
+            Ни числа загрузок, ни числа звёзд, ни числа пользователей на этом сайте нет, потому
+            что ни одно из них не выдержало бы планку, которую задаёт остальная часть страницы.
+          </dd>
+        </div>
+      </dl>
+
+      <p style="margin-top:24px">
+        Каждый из этих пунктов — пробел, который закрывается там, где он живёт, а не переписыванием
+        формулировки здесь. Когда пробел закроется, строка переедет в первую таблицу.
+      </p>
+    </section>
+
+    <p class="lm-fine" style="margin-top:48px;color:var(--text-faint);font-size:.85rem">
+      Страница описывает режим проверок, а не их текущее состояние; за статусом конкретного
+      запуска — вкладка Actions соответствующего репозитория.
+      История страницы —
+      <a href="https://github.com/DrobyshevDev/DrobyshevDev.github.io/commits/main/ru/checks/index.html" rel="noopener">в репозитории</a>.
+    </p>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:0;padding-top:0">
+      <p>© <span data-year>2026</span> DrobyshevDev. Исходный код под лицензиями MIT и Apache-2.0.</p>
+      <p><a href="/ru/">← На главную</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
