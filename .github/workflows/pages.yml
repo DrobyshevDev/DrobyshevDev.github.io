@@ -38,8 +38,30 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html 404.html robots.txt sitemap.xml .nojekyll _site/
-          cp -r assets legal ru _site/
+          cp -r assets checks legal ru _site/
           find _site -type f | sort
+
+      # Deliberate naming above means a forgotten directory is silently absent
+      # from the published site rather than from the repository: /checks/ was
+      # committed, passed every structural check, and 404ed for twenty minutes
+      # while /ru/checks/ worked, because `ru` is copied whole and `checks` was
+      # not on the list. check_site.py knows which pages exist; this asks it.
+      - name: Every page the checker knows about is actually published
+        run: |
+          python - <<'PY'
+          import pathlib, re, sys
+          source = pathlib.Path("scripts/check_site.py").read_text(encoding="utf-8")
+          match = re.search(r"^PAGES = \[(.*?)\]", source, re.MULTILINE | re.DOTALL)
+          if not match:
+              sys.exit("check_site.py no longer declares PAGES in the expected form")
+          pages = re.findall(r'"([^"]+)"', match.group(1))
+          missing = [p for p in pages if not (pathlib.Path("_site") / p).is_file()]
+          for page in missing:
+              print(f"  not published: {page}")
+          if missing:
+              sys.exit(f"{len(missing)} page(s) in the repository never reach the site")
+          print(f"  all {len(pages)} pages published")
+          PY
 
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
