@@ -25,9 +25,9 @@ jobs:
     name: Check the stated figures against their sources
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: "3.12"
 
@@ -68,7 +68,7 @@ jobs:
 
       - name: Report into the standing issue
         if: steps.figures.outputs.drifted != '0'
-        uses: peter-evans/create-issue-from-file@v6
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6
         with:
           issue-number: ${{ steps.standing.outputs.number }}
           title: A figure on the site has drifted
