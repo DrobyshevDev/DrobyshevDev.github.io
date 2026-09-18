@@ -26,6 +26,11 @@ the figure is reported as unverified rather than quietly passed.
 Standard library only. Needs network, which is why this runs in its own weekly
 workflow rather than in the required CI check.
 
+Sources are read through raw.githubusercontent.com, which serves from a cache
+that can lag a commit by a few minutes. That is invisible to a weekly run and
+confusing to anyone running this by hand right after a merge: if it reports a
+figure you have just corrected, check the commit landed before believing it.
+
 Usage:
     python scripts/check_figures.py [site_root]
 """
