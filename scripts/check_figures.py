@@ -16,6 +16,10 @@ Each figure here names its source and is checked against it:
                              on this site and in the organisation profile, which
                              spells the same figures out in words and so escaped
                              every check that looked for digits
+  lemma's modules            lemma's CITATION.cff, which lemma's own
+                             check_counts.py holds to docs/modules/ -- checked
+                             on both cards here (in digits) and in the profile
+                             (in words, twice)
   required dependencies      glia's pyproject.toml, read directly
   line coverage              Codecov, the run that produced it
 
@@ -55,6 +59,7 @@ PAGES = ("index.html", "ru/index.html")
 PROFILE = f"{RAW}/.github/master/profile/README.md"
 WORDS = {
     22: "twenty-two", 23: "twenty-three", 24: "twenty-four", 25: "twenty-five",
+    26: "twenty-six", 27: "twenty-seven", 28: "twenty-eight",
     29: "twenty-nine", 30: "thirty", 31: "thirty-one", 32: "thirty-two",
     33: "thirty-three", 34: "thirty-four", 35: "thirty-five",
 }
@@ -85,6 +90,22 @@ def source_counts() -> tuple[int, int, int] | None:
         return None
     match = re.search(r"(\d+) algorithms and (\d+) environments, (\d+) of them applied", citation)
     return tuple(int(g) for g in match.groups()) if match else None
+
+
+def source_lemma_modules() -> int | None:
+    """How many modules lemma actually has.
+
+    Read from lemma's CITATION.cff, which lemma's own scripts/check_counts.py
+    holds to docs/modules/ on every push. So this is not a second opinion about
+    the count -- it is the same count, followed one repository further out.
+    """
+    citation = fetch(f"{RAW}/lemma/main/CITATION.cff")
+    if citation is None:
+        return None
+    match = re.search(r"([a-z]+(?:-[a-z]+)?) modules in [a-z]+ parts", citation.lower())
+    if match is None:
+        return None
+    return next((value for value, word in WORDS.items() if word == match.group(1)), None)
 
 
 def source_glia_dependencies() -> int | None:
@@ -146,6 +167,23 @@ def main(root: Path) -> int:
                     f"but decisionrl ships {applied}"
                 )
 
+    modules = source_lemma_modules()
+    if modules is None:
+        unchecked.append("lemma's modules — its CITATION.cff could not be read, or spells a "
+                         "count this script has no word for")
+    else:
+        for name in PAGES:
+            page = (root / name).read_text(encoding="utf-8")
+            # Цифрами на карточке курса: "27 modules" / "27 модулей".
+            quoted = re.findall(r"(\d+) (?:modules|модул\w+)", page)
+            if not quoted:
+                problems.append(f"{name}: no longer states how many modules lemma has")
+            for value in quoted:
+                if int(value) != modules:
+                    problems.append(
+                        f"{name}: says {value} modules, lemma has {modules}"
+                    )
+
     dependencies = source_glia_dependencies()
     if dependencies is None:
         unchecked.append("required dependencies — glia's pyproject.toml could not be read")
@@ -188,6 +226,21 @@ def main(root: Path) -> int:
                     problems.append(
                         f"organisation profile: says {stated.group(1)} {label}, "
                         f"decisionrl ships {word} ({value})"
+                    )
+
+    if modules is not None:
+        profile = fetch(PROFILE)
+        if profile is None:
+            unchecked.append("the organisation profile could not be read for lemma's count")
+        else:
+            word = WORDS[modules]
+            stated = re.findall(r"([a-z]+(?:-[a-z]+)?) modules", profile.lower())
+            if not stated:
+                problems.append("organisation profile: no longer states a count of modules")
+            for said in stated:
+                if said != word:
+                    problems.append(
+                        f"organisation profile: says {said} modules, lemma has {word} ({modules})"
                     )
 
     unchecked.append(
